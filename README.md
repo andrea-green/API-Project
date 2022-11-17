@@ -1,6 +1,8 @@
 # AirBnB
 
 ## Database Schema Design
+![API-project-db-schema](https://user-images.githubusercontent.com/108085381/202576741-9370d663-5d39-4e32-802b-4c0e70b62653.png)
+
 
 ## API Documentation
 
