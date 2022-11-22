@@ -4,7 +4,8 @@
 
 ![airbnb-dbdiagram]
 
-[airbnb-dbdiagram]: ../assets/airbnb_dbdiagram.png
+![image](https://user-images.githubusercontent.com/108085381/203187830-3c076e08-a7ac-4cc1-9de6-34b25b3122d0.png)
+
 
 ## API Documentation
 
