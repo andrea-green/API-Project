@@ -19,7 +19,7 @@ module.exports = {
         lat:41.108130,
         lng:-75.036468,
         name:'The Bushkill House',
-        description:'The Bushkill House is a mountain escape located in the heart of the Poconos. On a wooded lot by a creek, the cabin offers spectacular views of the landscape. As designers for our studio, Ridge House (Insta @_ridgehouse), we were sure to curate the interiors.',
+        description:'The Bushkill House is a mountain escape located in the heart of the Poconos.',
         price:130
       },
       {
@@ -31,7 +31,7 @@ module.exports = {
         lat:39.750305,
         lng:-104.984630,
         name:'Colter Cottage',
-        description:'Welcome to the Colter Cottage - urban cottage meets European charm. Come stay in our beautiful carriage house in the heart of downtown Denver. ',
+        description:'Welcome to the Colter Cottage - urban cottage meets European charm.',
         price:150
       },
       {
@@ -43,7 +43,7 @@ module.exports = {
         lat:41.119569,
         lng:-75.055324,
         name:'Ridge House',
-        description: 'The Ridge House is a mountain escape located in the heart of the Poconos. On a wooded lot perched on a mountain ridge, the cabin offers spectacular views of the beautiful landscape.',
+        description: 'The Ridge House is a mountain escape located in the heart of the Poconos.',
         price:143
       }
     ],{});
