@@ -50,11 +50,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey:'userId'
       });
 
-      User.belongsToMany(models.Spot, {
-        through:models.Review,
-        otherKey:'spotId',
-        foreignKey:'userId'
-      });
+      // User.belongsToMany(models.Spot, {
+      //   through:models.Review,
+      //   otherKey:'spotId',
+      //   foreignKey:'userId'
+      // });
+      User.hasMany(models.Review, {foreignKey: 'userId'});
 
       User.hasMany(models.Spot, {foreignKey: 'ownerId'});
 
