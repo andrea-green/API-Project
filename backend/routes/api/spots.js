@@ -38,6 +38,8 @@ const validateSpot = [
     handleValidationErrors
 ];
 
+
+
 //Get all spots
 router.get('/', async(req,res)=>{
     const spots = await Spot.findAll();
@@ -84,13 +86,37 @@ router.post('/',validateSpot,requireAuth, async (req,res)=>{
 const ownerId = req.user.id
 // const {address,city,state,country,lat,lng,name,description,price} = req.body;
 
-if(!ownerId){
-    throw new Error
-}
 const newSpot = await Spot.create({ownerId,...req.body});
 res.json(newSpot);
 
-
 });
+
+
+// Add image to spot based on spot id
+router.post('/:spotId/images',requireAuth, async (req,res)=>{
+    const { url,preview } = req.body;
+    const spot = await Spot.findByPk(req.params.spotId)
+
+    if(!spot){
+        res.statusCode = 404;
+        res.json({
+            "message":"Spot couldn't be found",
+            "statusCode": 404
+        })
+    };
+
+    const spotId = +req.params.spotId;
+
+    const newSpotImage = await SpotImage.create({
+        spotId,
+        url,
+        preview
+    })
+
+
+    const newImage = await SpotImage.scope("defaultScope").findByPk(newSpotImage.id);
+    return res.json(newImage);
+});
+
 
 module.exports = router;
