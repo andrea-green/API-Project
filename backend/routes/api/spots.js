@@ -118,5 +118,45 @@ router.post('/:spotId/images',requireAuth, async (req,res)=>{
     return res.json(newImage);
 });
 
+// get all spots owned by current user
+router.get('/current', requireAuth, async (req,res) => {
+    const ownerId = +req.user.id
+    const spots = await Spot.findAll({where: {ownerId}});
+
+    let spotsList = [];
+    spots.forEach(spot =>{
+        spotsList.push(spot.toJSON())
+    });
+
+
+    let allSpots = [];
+
+    spotsList.forEach(async(spot) => {
+        const preview = await SpotImage.findOne({
+            where: {
+                spotId:spot.id,
+                preview:true
+            }
+        }).then(preview => preview.toJSON());
+
+        const spotRatings = await Review.findOne({
+            where:{
+                spotId: spot.id
+            },
+            attributes:[[sequelize.fn('AVG', sequelize.col('stars')),'AvgRating']]
+        }).then(spotRatings => spotRatings.toJSON());
+
+
+        spot.previewImage = preview.url;
+        spot.avgRating = spotRatings.AvgRating;
+
+        allSpots.push(spot);
+        if(spot === spotsList[spotsList.length-1]) {
+            res.json({Spots:allSpots})
+        }
+
+    });
+})
+
 
 module.exports = router;
