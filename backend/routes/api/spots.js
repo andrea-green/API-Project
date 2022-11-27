@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Spot, SpotImage, Review } = require('../../db/models');
+const { Spot, SpotImage, Review,User } = require('../../db/models');
 const sequelize = require('sequelize');
 const { requireAuth } = require('../../utils/auth');
 const { check } = require('express-validator');
@@ -157,6 +157,63 @@ router.get('/current', requireAuth, async (req,res) => {
 
     });
 })
+
+// Get details for spot from an id
+router.get('/:spotId', requireAuth,async(req,res)=>{
+
+    const mySpot = await Spot.findByPk (req.params.spotId,{
+        include:[{
+            model: SpotImage,
+            attributes: ["id", "url", "preview"]
+        },
+        {
+            model: User,
+            as: "Owner",
+            attributes: ["id", "firstName", "lastName"]
+        }]
+    });
+    console.log(mySpot);
+
+    if(!mySpot){
+        res.statusCode = 404;
+        res.json({
+            "message":"Spot couldn't be found",
+            "statusCode": 404
+        })
+    } else {
+    const numReviews = await Review.count({
+      where: { spotId: mySpot.id}
+    });
+    const avgStarRating = await Review.findOne({
+        where:{
+            spotId: mySpot.id
+        },
+        attributes:[[sequelize.fn('AVG', sequelize.col('stars')),'AvgRating']]
+    }).then(avgStarRating => avgStarRating.toJSON());
+
+    const data = {
+        id: mySpot.id,
+        ownerId: mySpot.ownerId,
+        address: mySpot.address,
+        city: mySpot.city,
+        state: mySpot.state,
+        country: mySpot.country,
+        lat: mySpot.lat,
+        lng: mySpot.lng,
+        name: mySpot.name,
+        description: mySpot.description,
+        price: mySpot.price,
+        createdAt: mySpot.createdAt,
+        updatedAt: mySpot.updatedAt,
+        numReviews: numReviews,
+        avgStarRating: avgStarRating.AvgRating,
+        SpotImages:mySpot.SpotImages,
+        Owner: mySpot.Owner
+    };
+
+    res.json(data);
+}
+});
 
 
 module.exports = router;
