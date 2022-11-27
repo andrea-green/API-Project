@@ -215,5 +215,26 @@ router.get('/:spotId', requireAuth,async(req,res)=>{
 }
 });
 
+// Edit a spot
+
+router.put('/:spotId', validateSpot,requireAuth, async(req,res)=>{
+    // find the spot with the spotId
+    const mySpot = await Spot.findByPk (req.params.spotId);
+    // check to make sure the user is also the owner of the spot -> basically the user id === ownerId.
+    // if the spot dne, return a 404 error with the message and statuscode in the readme.
+    if(!mySpot){
+        res.statusCode = 404;
+        res.json({
+            "message":"Spot couldn't be found",
+            "statusCode": 404
+        })
+    } else if(mySpot.ownerId === +req.user.id ){
+        // if thats good- update the spot record and return the data with all the attributes included in the readme.
+        res.json(mySpot)
+        // if validate spot is violated- return an error response with status code 400. -> thats validateSpot
+    }
+
+});
+
 
 module.exports = router;
