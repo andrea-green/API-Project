@@ -20,6 +20,7 @@ const validateReview = [
 
 router.post('/:reviewId/images', requireAuth, async(req,res)=>{
     //first get the review based on the review id.
+    const { url } = req.body;
     const myReview = await Review.findByPk(req.params.reviewId);
     // get the reviewImages too??
     const myReviewImages = await ReviewImage.findByPk(req.params.reviewId);
@@ -31,44 +32,51 @@ router.post('/:reviewId/images', requireAuth, async(req,res)=>{
             "statusCode": 404
         })
     }
-        // check to make sure number of images is no more than 10. ->
-        // probably check the length? if reviewImage thing . length is < 10, throw the error?
-    // } else if ( myReviewImages.length > 10){
-    //     res.statusCode = 403;
-    //     res.json({
-    //         "message":"Maximum number of images for this resource was reached",
-    //         "statusCode": 403
-    //     })
-    // };
-    // if no errors, then create new image.
     const reviewId = +req.params.reviewId;
 
     const newReviewImage = await ReviewImage.create({
         reviewId,
         url
     });
-    const finalReviewImage = await ReviewImage.findByPk(newReviewImage.id);
+    const finalReviewImage = await ReviewImage.scope("defaultScope").findByPk(newReviewImage.id);
     return res.json(finalReviewImage);
+    // check to make sure number of images is no more than 10. ->
+    // probably check the length? if reviewImage thing . length is < 10, throw the error?
+let imagesCount = await ReviewImage.findOne({
+    where:{reviewId},
+    attributes: [
+        [sequelize.fn("COUNT", sequelize.col('ReviewImage.url')),"reviewImageCount"]
+    ]
+}).then(imagesCount => imagesCount.toJSON());
+
+if(imagesCount > 10){
+    res.statusCode = 403;
+    res.json({
+        "message":"RMaximum number of images for this resource was reached",
+        "statusCode": 403
+    })
+
+};
 });
 
 // get all reviews of current user
 
-router.get('/current', requireAuth, async(req,res)=>{
-    //first get the current user info
-    const currentUser = +req.user.id;
-    //get all of the reviews of the current user.
-    const userReviews = await Review.findAll({currentUser}, {
-        include: [{
-            model: SpotImage,
-            attributes: ["id", "url", "preview"]
-        },
-        {
-            model:User,
-            as: "Owner",
-            attributes: ["id", "firstName", "lastName"]
-        }]
-    });
-});
+// router.get('/current', requireAuth, async(req,res)=>{
+//     //first get the current user info
+//     const currentUser = +req.user.id;
+//     //get all of the reviews of the current user.
+//     const userReviews = await Review.findAll({currentUser}, {
+//         include: [{
+//             model: SpotImage,
+//             attributes: ["id", "url", "preview"]
+//         },
+//         {
+//             model:User,
+//             as: "Owner",
+//             attributes: ["id", "firstName", "lastName"]
+//         }]
+//     });
+// });
 
 
 
