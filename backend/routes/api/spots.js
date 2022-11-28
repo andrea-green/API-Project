@@ -55,7 +55,97 @@ const validateReview = [
 
 //Get all spots
 router.get('/', async(req,res)=>{
-    const spots = await Spot.findAll();
+    let { page, size, minLat,maxLat, minLng,maxLng,minPrice,maxPrice } = req.query;
+    const errors = {};
+    const pagination = {};
+    const where = {};
+
+    if(page){
+        if(page <= 0 || isNaN(page) ){
+            errors.page = 'Page must be greater than or equal to 1'
+        }else if (page > 10) page = 10
+    }else {page = 1};
+
+    if(size){
+        if(size <= 0 || isNaN(size)){
+            errors.size = 'Size must be greater than or equal to 1'
+        } else if (size > 20) size = 20
+    }else {size = 20};
+
+
+
+
+    if(minLat){
+        if (isNaN(minLat)){errors.minLat = 'Minimum latitude is invalid'};
+        if (!where.lat)where.lat = {};
+        where.lat[Op.gte] = minLat;
+    };
+    if(maxLat){
+        if (isNaN(maxLat)){
+            errors.maxLat = 'Maximum latitude is invalid'
+        }else if (minLat) {
+            if (maxLat < minLat) {
+                errors.maxLat = 'Maximum latitude is invalid'
+            }
+        }
+        if (!where.lat)where.lat = {};
+        where.lat[Op.lte] = maxLat;
+    };
+
+
+    if(minLng){
+        if (isNaN(minLng)){errors.minLng = 'Minimum longitude is invalid'}
+        if (!where.lng)where.lng = {};
+        where.lng[Op.gte] = minLng;
+    };
+    if(maxLng){
+        if (isNaN(maxLng)){
+            errors.maxLng = 'Maximum longitude is invalid'
+        }else if (minLng) {
+            if (maxLng < minLng) {
+                errors.maxLng = 'Maximum longitude is invalid'
+            }
+        }
+
+        if (!where.lng)where.lng = {};
+        where.lng[Op.lte] = maxLng;
+    };
+
+
+    if(minPrice){
+        if (isNaN(minPrice) || minPrice < 0 ){
+            errors.minPrice= 'Minimum price must be greater than or equal to 0'
+        }
+        if (!where.price)where.price = {};
+        where.price[Op.gte] = minPrice;
+    };
+    if(maxPrice){
+        if (isNaN(maxPrice) || maxPrice < 0 ){
+            errors.maxPrice= 'Maximum price must be greater than or equal to 0'
+        } else if (minPrice){
+            if(minPrice > maxPrice) {
+                errors.maxPrice= 'Maximum price must be greater than or equal to 0'
+            }
+        }
+        if (!where.price)where.price = {};
+        where.price[Op.lte] = maxPrice;
+    };
+
+    // console.log(where);
+
+    if(Object.keys(errors).length) {
+        res.status(400)
+        return res.json({
+            "message": "Validation Error",
+            "statusCode": 400,
+            "errors":errors
+        })
+    };
+
+    pagination.limit = +size;
+    pagination.offset = +size * (+page - 1);
+
+    const spots = await Spot.findAll({where,...pagination});
 
     let spotsList = [];
     spots.forEach(spot =>{
@@ -96,7 +186,7 @@ router.get('/', async(req,res)=>{
 
         allSpots.push(spot);
         if(spot === spotsList[spotsList.length-1]) {
-            res.json({Spots:allSpots})
+            res.json({Spots:allSpots,page,size})
         }
 
 
