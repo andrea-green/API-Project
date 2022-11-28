@@ -61,22 +61,53 @@ if(imagesCount > 10){
 
 // get all reviews of current user
 
-// router.get('/current', requireAuth, async(req,res)=>{
-//     //first get the current user info
-//     const currentUser = +req.user.id;
-//     //get all of the reviews of the current user.
-//     const userReviews = await Review.findAll({currentUser}, {
-//         include: [{
-//             model: SpotImage,
-//             attributes: ["id", "url", "preview"]
-//         },
-//         {
-//             model:User,
-//             as: "Owner",
-//             attributes: ["id", "firstName", "lastName"]
-//         }]
-//     });
-// });
+router.get('/current', requireAuth, async(req,res)=>{
+    //first get the current user info
+    const currentUser = +req.user.id;
+    //get all of the reviews of the current user.
+    const Reviews = await Review.findAll({
+        where:{
+            userId:currentUser
+        },
+        include: [
+            {
+                model:User,
+                attributes: ["id", "firstName", "lastName"]
+            },
+            {
+            model: Spot,
+            attributes: {exclude: ["description", "createdAt", "updatedAt"]}
+        },
+        {
+            model:ReviewImage,
+            attributes: ["id", "url"]
+        }
+    ]
+    })
+    let previewImages = [];
+
+    //iterate over Reviews
+    // for each review, make it into an object-> conver to JSON.
+    for(let review of Reviews) {
+    // Reviews.forEach(async(review)=>{
+        // Review.Spot to get to the Spot info
+        // then make query for spotImage. where spotId = Review.spot.id where previewImage = true.
+        const myReview = review.toJSON();
+
+        const previewImage = await SpotImage.findOne({
+            where: {
+             spotId:review.Spot.id,
+             preview:true
+            }
+        }).then(previewImage => previewImage.toJSON());
+
+        // then set review.spot.preview = spotImage.url.
+        myReview.Spot.previewImage = previewImage.url;
+        // push this into array, then return array.
+        previewImages.push(myReview);
+    };
+    res.json({Reviews:previewImages});
+});
 
 
 

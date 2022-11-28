@@ -38,6 +38,7 @@ const validateSpot = [
     handleValidationErrors
 ];
 
+
 const validateReview = [
     check('review')
     .notEmpty()
