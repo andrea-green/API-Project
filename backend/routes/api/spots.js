@@ -127,7 +127,11 @@ router.post('/:spotId/images',requireAuth, async (req,res)=>{
     })
 
 
-    const newImage = await SpotImage.scope("defaultScope").findByPk(newSpotImage.id);
+    const newImage = await SpotImage.findByPk(newSpotImage.id,{
+        where:{
+            attributes:[{exclude:["spotId","updatedAt","createdAt"]}]
+        }
+    });
     return res.json(newImage);
 });
 
