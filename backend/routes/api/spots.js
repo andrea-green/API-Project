@@ -171,7 +171,7 @@ router.get('/current', requireAuth, async (req,res) => {
                 spotId: spot.id
             },
             attributes:[[sequelize.fn('AVG', sequelize.col('stars')),'AvgRating']]
-        }); 
+        });
 
 
 
@@ -276,26 +276,7 @@ router.put('/:spotId', validateSpot,requireAuth, async(req,res)=>{
 
 });
 
-// delete a spot
-// router.delete('/:spotId', requireAuth, async(req,res) => {
-//     const mySpot = await Spot.findByPk(req.params.spotId);
 
-//     if(!mySpot){
-//         res.statusCode = 404;
-//         res.json({
-//             "message":"Spot couldn't be found",
-//             "statusCode": 404
-//         })
-//     } else if(mySpot.ownerId === +req.user.id){
-//         await mySpot.destroy();
-//         res.status(200);
-
-//         res.json({
-//             "message": "Successfully deleted",
-//             "statusCode": 200
-//         })
-//     }
-// });
 
 
 // create a review for spot based on spot id
@@ -482,7 +463,29 @@ router.get('/:spotId/bookings', requireAuth, async(req,res)=>{
 
 }); /* done */
 
+// delete a spot
+router.delete('/:spotId', requireAuth, async(req,res) => {
+    const mySpot = await Spot.findByPk(req.params.spotId, {
+        where:{
+            userId:req.user.id
+        }
+    });
 
+    if(!mySpot){
+        res.statusCode = 404;
+        res.json({
+            "message":"Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
+    await mySpot.destroy();
+    res.status(200);
+    res.json({
+        "message": "Successfully deleted",
+        "statusCode": 200
+    });
+
+});
 
 
 module.exports = router;
