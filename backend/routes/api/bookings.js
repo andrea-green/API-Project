@@ -57,7 +57,12 @@ router.get('/current', requireAuth, async(req,res)=>{
 
 // edit booking
 router.put('/:bookingId', requireAuth, async(req,res)=>{
-    const myBooking = await Booking.findByPk(req.params.bookingId);
+    const myBooking = await Booking.findOne({
+        where:{
+            id:req.params.bookingId,
+            userId:req.user.id
+        }
+    });
     const  {startDate, endDate } = req.body;
     const start = new Date(startDate).getTime();
     const end = new Date(endDate).getTime();
