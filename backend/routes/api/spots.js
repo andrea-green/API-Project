@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Spot, SpotImage, Review,User } = require('../../db/models');
+const { Spot, SpotImage, Review,User,ReviewImage } = require('../../db/models');
 const sequelize = require('sequelize');
 const { requireAuth } = require('../../utils/auth');
 const { check } = require('express-validator');
@@ -316,5 +316,38 @@ router.post('/:spotId/reviews', validateReview, requireAuth, async(req,res) =>{
 
     res.json(newSpotReview);
 });
+
+// get all reviews by spot's id
+router.get('/:spotId/reviews',async(req,res)=>{
+    // first get the spot with the spotId in url
+    const mySpot = await Spot.findByPk(req.params.spotId);
+    // check for 404 error if that review dne.
+     if (!mySpot){
+        res.statusCode = 404;
+        res.json({
+            "message":"Spot couldn't be found",
+            "statusCode": 404
+        })
+     };
+    // if it does, do the thing.
+
+    const mySpotId = +req.params.spotId;
+    const Reviews = await Review.findAll({
+        where:{
+            spotId:mySpotId
+        },
+        include: [
+            {
+                model:User,
+                attributes: ["id", "firstName", "lastName"]
+            },
+            {
+                model:ReviewImage,
+                attributes: ["id", "url"]
+            }
+        ]
+    });
+    res.json({Reviews})
+}); /*done*/
 
 module.exports = router;
