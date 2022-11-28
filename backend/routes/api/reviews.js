@@ -109,7 +109,26 @@ router.get('/current', requireAuth, async(req,res)=>{
     res.json({Reviews:previewImages});
 });
 
+// edit a review
 
+router.put('/:reviewId', validateReview,requireAuth, async(req,res)=>{
+    //find the review with the reviewId i want.
+    const myReview = await Review.findByPk(req.params.reviewId);
+
+    // check if myReview dne.
+    if(!myReview){
+        res.statusCode = 404;
+        res.json({
+            "message":"Review couldn't be found",
+            "statusCode": 404
+        })
+        // if it does, do the thing.
+        // check that review's user id is the same as the user id in the body
+    } else if (myReview.userId === +req.user.id) {
+        res.json(myReview)
+    }
+
+}); /*done*/
 
 
 
