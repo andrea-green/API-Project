@@ -71,18 +71,28 @@ router.get('/', async(req,res)=>{
                 spotId:spot.id,
                 preview:true
             }
-        }).then(preview => preview.toJSON());
+        });
 
         const spotRatings = await Review.findOne({
             where:{
                 spotId: spot.id
             },
             attributes:[[sequelize.fn('AVG', sequelize.col('stars')),'AvgRating']]
-        }).then(spotRatings => spotRatings.toJSON());
+        });
 
 
-        spot.previewImage = preview.url;
-        spot.avgRating = spotRatings.AvgRating;
+        if(!spotRatings){
+            spot.avgRating= "no reviews"
+        }else {
+            spot.avgRating = spotRatings.AvgRating;
+        };
+
+        if(!preview){
+            spot.previewImage = "no preview image"
+        } else {
+            spot.previewImage = preview.url;
+        };
+
 
         allSpots.push(spot);
         if(spot === spotsList[spotsList.length-1]) {
@@ -154,18 +164,29 @@ router.get('/current', requireAuth, async (req,res) => {
                 spotId:spot.id,
                 preview:true
             }
-        }).then(preview => preview.toJSON());
+        });
 
         const spotRatings = await Review.findOne({
             where:{
                 spotId: spot.id
             },
             attributes:[[sequelize.fn('AVG', sequelize.col('stars')),'AvgRating']]
-        }).then(spotRatings => spotRatings.toJSON());
+        }); 
 
 
-        spot.previewImage = preview.url;
-        spot.avgRating = spotRatings.AvgRating;
+
+        if(!spotRatings){
+            spot.avgRating= "no reviews"
+        }else {
+            spot.avgRating = spotRatings.AvgRating;
+        };
+
+        if(!preview){
+            spot.previewImage = "no preview image"
+        } else {
+            spot.previewImage = preview.url;
+        };
+
 
         allSpots.push(spot);
         if(spot === spotsList[spotsList.length-1]) {

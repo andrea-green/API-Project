@@ -7,47 +7,47 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Op } = require("sequelize");
 
-// delete spot image
-
+//delete review image
 router.delete('/:imageId', requireAuth, async(req,res)=>{
-    const myImage = await SpotImage.findByPk(req.params.imageId);
-    if(!myImage){
+    const myReviewImage = await ReviewImage.findByPk(req.params.imageId);
+
+    if(!myReviewImage){
         res.statusCode = 404;
         res.json({
-            "message":"Spot Image couldn't be found",
+            "message":"Review Image couldn't be found",
             "statusCode": 404
         })
     };
-    const image = myImage.toJSON();
-    // console.log('image',image)
-    // const imageSpotId = Object.values(image);
+    const reviewImage = myReviewImage.toJSON();
 
-    // console.log(myImage);
-    // console.log(imageSpotId);
-    const mySpot = await Spot.findOne({
+    const myReview = await Review.findOne({
         where:{
-            ownerId:req.user.id,
-            id: image.spotId
+            userId:req.user.id,
+            id: reviewImage.reviewId
         }
     });
 
-    if(!mySpot){
+    if(!myReview){
         res.statusCode = 404;
         res.json({
-            "message":"Spot couldn't be found",
+            "message":"Review couldn't be found",
             "statusCode": 404
         })
     };
 
-    await myImage.destroy();
+    await myReviewImage.destroy();
     res.status(200);
     res.json({
         "message": "Successfully deleted",
         "statusCode": 200
     });
 
+}); /*done*/
 
 
-}); /*done */
+
+
+
+
 
 module.exports = router;

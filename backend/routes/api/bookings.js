@@ -43,10 +43,15 @@ router.get('/current', requireAuth, async(req,res)=>{
              spotId:booking.Spot.id,
              preview:true
             }
-        }).then(previewImage => previewImage.toJSON());
+        });
 
         // then set review.spot.preview = spotImage.url.
-        myBooking.Spot.previewImage = previewImage.url;
+
+        if(!previewImage){
+            myBooking.Spot.previewImage = "no preview image found"
+        } else {
+            myBooking.Spot.previewImage = previewImage.url;
+        }
         // push this into array, then return array.
         previewImages.push(myBooking);
     };

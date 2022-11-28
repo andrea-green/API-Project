@@ -38,7 +38,11 @@ router.post('/:reviewId/images', requireAuth, async(req,res)=>{
         reviewId,
         url
     });
-    const finalReviewImage = await ReviewImage.scope("defaultScope").findByPk(newReviewImage.id);
+    const finalReviewImage = await ReviewImage.findByPk(newReviewImage.id, {
+        where: {
+            attributes: ["id", "url"]
+        }
+    });
     return res.json(finalReviewImage);
     // check to make sure number of images is no more than 10. ->
     // probably check the length? if reviewImage thing . length is < 10, throw the error?
@@ -47,7 +51,7 @@ let imagesCount = await ReviewImage.findOne({
     attributes: [
         [sequelize.fn("COUNT", sequelize.col('ReviewImage.url')),"reviewImageCount"]
     ]
-}).then(imagesCount => imagesCount.toJSON());
+});
 
 if(imagesCount > 10){
     res.statusCode = 403;
@@ -99,10 +103,15 @@ router.get('/current', requireAuth, async(req,res)=>{
              spotId:review.Spot.id,
              preview:true
             }
-        }).then(previewImage => previewImage.toJSON());
+        });
 
         // then set review.spot.preview = spotImage.url.
-        myReview.Spot.previewImage = previewImage.url;
+        if(!previewImage){
+            myReview.Spot.previewImage = "no preview image found"
+        } else {
+            myReview.Spot.previewImage = previewImage.url;
+        };
+
         // push this into array, then return array.
         previewImages.push(myReview);
     };
