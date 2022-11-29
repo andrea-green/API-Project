@@ -21,9 +21,14 @@ const validateReview = [
 router.post('/:reviewId/images', requireAuth, async(req,res)=>{
     //first get the review based on the review id.
     const { url } = req.body;
-    const myReview = await Review.findByPk(req.params.reviewId);
+    const myReview = await Review.findOne({
+        where:{
+            id: req.params.reviewId,
+            userId: req.user.id
+        }
+    });
     // get the reviewImages too??
-    const myReviewImages = await ReviewImage.findByPk(req.params.reviewId);
+    // const myReviewImages = await ReviewImage.findByPk(req.params.reviewId);
     // then check to make sure that review exists.
     if(!myReview){
         res.statusCode = 404;
@@ -34,33 +39,27 @@ router.post('/:reviewId/images', requireAuth, async(req,res)=>{
     }
     const reviewId = +req.params.reviewId;
 
+    // check to make sure number of images is no more than 10. ->
+    // probably check the length? if reviewImage thing . length is < 10, throw the error?
+    const imagesCount = await ReviewImage.findAll({
+        where:{reviewId}
+    });
+    console.log(imagesCount);
+
+    if(imagesCount.length >= 10){
+        res.statusCode = 403;
+        res.json({
+            "message":"Maximum number of images for this resource was reached",
+            "statusCode": 403
+        })
+
+    };
     const newReviewImage = await ReviewImage.create({
         reviewId,
         url
     });
-    const finalReviewImage = await ReviewImage.findByPk(newReviewImage.id, {
-        where: {
-            attributes: ["id", "url"]
-        }
-    });
+    const finalReviewImage = await ReviewImage.findByPk(newReviewImage.id, {attributes: ["id", "url"]});
     return res.json(finalReviewImage);
-    // check to make sure number of images is no more than 10. ->
-    // probably check the length? if reviewImage thing . length is < 10, throw the error?
-let imagesCount = await ReviewImage.findOne({
-    where:{reviewId},
-    attributes: [
-        [sequelize.fn("COUNT", sequelize.col('ReviewImage.url')),"reviewImageCount"]
-    ]
-});
-
-if(imagesCount > 10){
-    res.statusCode = 403;
-    res.json({
-        "message":"RMaximum number of images for this resource was reached",
-        "statusCode": 403
-    })
-
-};
 });
 
 // get all reviews of current user

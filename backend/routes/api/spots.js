@@ -163,18 +163,26 @@ router.get('/', async(req,res)=>{
             }
         });
 
-        const spotRatings = await Review.findOne({
+        const spotRatings = await Review.findAll({
             where:{
                 spotId: spot.id
             },
-            attributes:[[sequelize.fn('AVG', sequelize.col('stars')),'AvgRating']]
+            attributes:["stars"]
         });
 
+        let stars = 0;
+        spotRatings.forEach(rating=>{
+            stars += rating.stars
+        });
 
-        if(!spotRatings){
+        const AvgRating = stars/spotRatings.length;
+        // [sequelize.fn('AVG', sequelize.col('stars')),'AvgRating']
+
+
+        if(!AvgRating){
             spot.avgRating= "no reviews"
         }else {
-            spot.avgRating = spotRatings.AvgRating;
+            spot.avgRating = AvgRating;
         };
 
         if(!preview){
@@ -227,11 +235,7 @@ router.post('/:spotId/images',requireAuth, async (req,res)=>{
     })
 
 
-    const newImage = await SpotImage.findByPk(newSpotImage.id,{
-        where:{
-            attributes:[{exclude:["spotId","updatedAt","createdAt"]}]
-        }
-    });
+    const newImage = await SpotImage.findByPk(newSpotImage.id,{attributes:["id","url", "preview"]});
     return res.json(newImage);
 });
 
@@ -256,19 +260,26 @@ router.get('/current', requireAuth, async (req,res) => {
             }
         });
 
-        const spotRatings = await Review.findOne({
+        const spotRatings = await Review.findAll({
             where:{
                 spotId: spot.id
             },
-            attributes:[[sequelize.fn('AVG', sequelize.col('stars')),'AvgRating']]
+            attributes:["stars"]
         });
 
+        let stars = 0;
+        spotRatings.forEach(rating=>{
+            stars += rating.stars
+        });
+
+        const AvgRating = stars/spotRatings.length;
+        // [sequelize.fn('AVG', sequelize.col('stars')),'AvgRating']
 
 
-        if(!spotRatings){
+        if(!AvgRating){
             spot.avgRating= "no reviews"
         }else {
-            spot.avgRating = spotRatings.AvgRating;
+            spot.avgRating = AvgRating;
         };
 
         if(!preview){
@@ -312,12 +323,32 @@ router.get('/:spotId', requireAuth,async(req,res)=>{
     const numReviews = await Review.count({
       where: { spotId: mySpot.id}
     });
-    const avgStarRating = await Review.findOne({
+    // const avgStarRating = await Review.findOne({
+    //     where:{
+    //         spotId: mySpot.id
+    //     },
+    //     attributes:[[sequelize.fn('AVG', sequelize.col('stars')),'AvgRating']]
+    // }).then(avgStarRating => avgStarRating.toJSON());
+    const spotRatings = await Review.findAll({
         where:{
             spotId: mySpot.id
         },
-        attributes:[[sequelize.fn('AVG', sequelize.col('stars')),'AvgRating']]
-    }).then(avgStarRating => avgStarRating.toJSON());
+        attributes:["stars"]
+    });
+
+    let stars = 0;
+    spotRatings.forEach(rating=>{
+        stars += rating.stars
+    });
+
+    const avgStarRating = stars/spotRatings.length;
+    // [sequelize.fn('AVG', sequelize.col('stars')),'AvgRating']
+
+    let avgRating = "no reviews";
+
+    if(avgStarRating){
+        avgRating = avgStarRating;
+    };
 
     const data = {
         id: mySpot.id,
@@ -334,7 +365,7 @@ router.get('/:spotId', requireAuth,async(req,res)=>{
         createdAt: mySpot.createdAt,
         updatedAt: mySpot.updatedAt,
         numReviews: numReviews,
-        avgStarRating: avgStarRating.AvgRating,
+        avgStarRating: avgRating,
         SpotImages:mySpot.SpotImages,
         Owner: mySpot.Owner
     };
