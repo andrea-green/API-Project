@@ -133,7 +133,18 @@ router.put('/:reviewId', validateReview,requireAuth, async(req,res)=>{
         // if it does, do the thing.
         // check that review's user id is the same as the user id in the body
     } else if (myReview.userId === +req.user.id) {
+        const { review, stars } = req.body;
+        if(review) myReview.review = review;
+        if(stars) myReview.stars = stars;
+
+        await myReview.save()
         res.json(myReview)
+    } else {
+        res.statusCode = 403;
+        res.json({
+            "message":"You are not authorized",
+            "statusCode": 403
+        })
     }
 
 }); /*done*/
