@@ -91,20 +91,21 @@ router.put('/:bookingId', requireAuth, async(req,res)=>{
         })
     };
 
-    if(start <= Date.now()){
+    const bookingStartDate = new Date(myBooking.startDate).getTime();
+    const bookingEndDate = new Date(myBooking.endDate).getTime();
+
+    if(start <= Date.now() || bookingStartDate <= Date.now()){
         res.status(403);
         return res.json({
             "message": "Past bookings can't be modified",
             "statusCode": 403
         })
     };
-    const spotBookings = await Booking.findAll({
-        where:{id:req.params.bookingId}
-    });
+    // const spotBookings = await Booking.findAll({
+    //     where:{id:req.params.bookingId}
+    // });
 
-    for (let booking of spotBookings) {
-        const bookingStartDate = new Date(booking.startDate).getTime();
-        const bookingEndDate = new Date(booking.endDate).getTime();
+    // for (let booking of spotBookings) {
 
         if(start === bookingStartDate || start > bookingStartDate && start <= bookingEndDate
              || end === bookingStartDate || end > bookingStartDate && end <= bookingEndDate ){
@@ -118,9 +119,14 @@ router.put('/:bookingId', requireAuth, async(req,res)=>{
                 }
             })
         }
-    };
+    // };
 
-res.json(myBooking);
+    if(startDate)myBooking.startDate = startDate;
+    if(endDate)myBooking.endDate = endDate;
+
+    await myBooking.save();
+    res.json(myBooking);
+    
 }); /* done */
 
 // delete a booking

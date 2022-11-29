@@ -73,8 +73,6 @@ router.get('/', async(req,res)=>{
     }else {size = 20};
 
 
-
-
     if(minLat){
         if (isNaN(minLat)){errors.minLat = 'Minimum latitude is invalid'};
         if (!where.lat)where.lat = {};
@@ -194,13 +192,13 @@ router.get('/', async(req,res)=>{
 
         allSpots.push(spot);
         if(spot === spotsList[spotsList.length-1]) {
-            res.json({Spots:allSpots,page,size})
+            return res.json({Spots:allSpots,page,size})
         }
 
 
     });
-
-    });
+    res.json({Spots:allSpots,page,size})
+});
 
 // Create a spot
 router.post('/',validateSpot,requireAuth, async (req,res)=>{
@@ -391,8 +389,26 @@ router.put('/:spotId', validateSpot,requireAuth, async(req,res)=>{
         })
     } else if(mySpot.ownerId === +req.user.id ){
         // if thats good- update the spot record and return the data with all the attributes included in the readme.
+        const { address,city,state,country,lat,lng,name,description,price } = req.body;
+        if(address)mySpot.address = address;
+        if(city)mySpot.city = city;
+        if(state)mySpot.state = state;
+        if(country)mySpot.country = country;
+        if(lat)mySpot.lat = lat;
+        if(lng)mySpot.lng = lng;
+        if(name)mySpot.name = name;
+        if(description)mySpot.description = description;
+        if(price)mySpot.price = price;
+
+        await mySpot.save();
         res.json(mySpot)
         // if validate spot is violated- return an error response with status code 400. -> thats validateSpot
+    }else {
+        res.statusCode = 403;
+        res.json({
+            "message":"You are not authorized",
+            "statusCode": 403
+        })
     }
 
 });
