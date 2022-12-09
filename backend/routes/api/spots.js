@@ -151,7 +151,11 @@ router.get('/', async(req,res)=>{
     });
 
 
+    if(!spots.length){
+       return res.json({Spots:spots,page,size})
+    }
     let allSpots = [];
+
 
     spotsList.forEach(async(spot) => {
         const preview = await SpotImage.findOne({
@@ -195,9 +199,7 @@ router.get('/', async(req,res)=>{
             return res.json({Spots:allSpots,page,size})
         }
 
-
     });
-    res.json({Spots:allSpots,page,size})
 });
 
 // Create a spot
