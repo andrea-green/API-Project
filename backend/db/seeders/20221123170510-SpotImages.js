@@ -12,17 +12,17 @@ module.exports = {
     return queryInterface.bulkInsert(options,[
       {
         spotId:1,
-        url:'url1',
+        url:'https://a0.muscache.com/im/pictures/feeb336d-f553-4585-8ae7-797c6e6878e9.jpg?im_w=1200',
         preview:true,
       },
       {
         spotId:2,
-        url:'url2',
+        url:'https://a0.muscache.com/im/pictures/590c3404-1cc2-4738-a934-6f41098bf612.jpg?im_w=1200',
         preview:true,
       },
       {
         spotId:3,
-        url:'url3',
+        url:'https://a0.muscache.com/im/pictures/a41e07a6-72ac-4795-94b4-5ca75751c116.jpg?im_w=1440',
         preview:true,
       }
     ],{});

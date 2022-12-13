@@ -8,11 +8,12 @@ function AllSpots() {
 
     // const allSpots = useSelector((state) => console.log('state.Spot',state.Spots));
     // console.log(allSpots);
-    const allSpots = useSelector((state)=>{
-        Object.values(state.Spots)
-    });
+    const allSpots = useSelector((state)=>state.Spots);
+    // console.log('state',state)
 
-    console.log(allSpots); 
+    // console.log('allSpots',allSpots);
+    const allSpotsArr = Object.values(allSpots);
+     console.log('allSpotsArr',allSpotsArr);
 
     useEffect(() =>{
         //pass in thunk action creator
@@ -22,18 +23,21 @@ function AllSpots() {
 
     return (
         <div>
-            <li>
-                {/* {allSpots.map(({id,name,city,state,avgRating,price}) => {
-                    < AllSpots
-                    key={id}
-                    name={name}
-                    city={city}
-                    state={state}
-                    avgRating={avgRating}
-                    price={price}
-                    />
-                })}; */}
-            </li>
+            {allSpotsArr.map(({city,state,avgRating,price,previewImage}) => (
+                <div>
+                    <div className='spot-preview-image-div'>
+                         <img src={previewImage}></img>
+                    </div>
+                    <div className='city-state-review-div'>
+                        <div>{`${city},${state}`}</div>
+                        <div>{avgRating}</div>
+                    </div>
+                    <div className='price-div'>
+                        <li>{`$${price} night`}</li>
+                    </div>
+                </div>
+                ))};
+
         </div>
     );
 };
