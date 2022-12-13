@@ -145,6 +145,8 @@ router.get('/', async(req,res)=>{
 
     const spots = await Spot.findAll({where,...pagination});
 
+    // console.log('spots route', spots);
+
     let spotsList = [];
     spots.forEach(spot =>{
         spotsList.push(spot.toJSON())
@@ -194,10 +196,19 @@ router.get('/', async(req,res)=>{
         };
 
 
-        allSpots.push(spot);
-        if(spot === spotsList[spotsList.length-1]) {
+        // allSpots.push(spot);
+        // if(spot === spotsList[spotsList.length-1]) {
+        //     console.log('allSpots route', allSpots)
+        //     return res.json({Spots:allSpots,page,size})
+        // }
+
+         allSpots.push(spot);
+        if(allSpots.length === spotsList.length) {
+            console.log('allSpots route', allSpots)
             return res.json({Spots:allSpots,page,size})
         }
+
+
 
     });
 });
