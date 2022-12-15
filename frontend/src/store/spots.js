@@ -3,8 +3,9 @@ import { csrfFetch } from "./csrf";
 //constant variables specifying action types
 const LOAD_SPOTS = "spots/LOAD_SPOTS";
 const LOAD_SPOT= "spots/LOAD_SPOT";
-const DELETE_SPOT = 'spots/DELETE_SPOT'
-const UPDATE_SPOT = 'spots/UPDATE_SPOT'
+const DELETE_SPOT = 'spots/DELETE_SPOT';
+const UPDATE_SPOT = 'spots/UPDATE_SPOT';
+const CREATE_SPOT = 'spots/CREATE_SPOT'
 
 
 
@@ -97,7 +98,8 @@ export default function spotReducer (state = initialState, action) {
         // case create new spot
 
         case CREATE_SPOT:{
-            const newState = {...state,allSpots:{...state,allSpots}};
+            const newState = {...state, allSpots:{...state.allSpots}}
+            // const newState = {...state, allSpots:{...state,allSpots}};
             newState.allSpots[action.spot.id] = action.spot;
             return newState;
         };
