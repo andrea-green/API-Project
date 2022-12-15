@@ -1,6 +1,6 @@
-import {useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { getSpots } from '../../store/spots';
+import { getSpotsThunk } from '../../store/spots';
 
 
 function AllSpots() {
@@ -8,16 +8,17 @@ function AllSpots() {
 
     // const allSpots = useSelector((state) => console.log('state.Spot',state.Spots));
     // console.log(allSpots);
-    const allSpots = useSelector((state)=>state.Spots);
+    const allSpots = useSelector((state)=>state.Spots.allSpots);
     // console.log('state',state)
 
     // console.log('allSpots',allSpots);
     const allSpotsArr = Object.values(allSpots);
-     console.log('allSpotsArr',allSpotsArr);
+     //console.log('allSpotsArr',allSpotsArr);
 
-    useEffect(() =>{
+     useEffect(() =>{
+        // console.log('action working')
         //pass in thunk action creator
-        dispatch(getSpots())
+        dispatch(getSpotsThunk())
     },[dispatch]);
 
 
