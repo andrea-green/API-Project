@@ -9,7 +9,8 @@ import { deleteSpotThunk } from '../../store/spots';
 function SingleSpot() {
     const dispatch = useDispatch();
     const { spotId } = useParams();
-    const history = useHistory(); 
+    const history = useHistory();
+    const mySpot = useSelector((state)=>state.Spots.singleSpot)
 
     const deleteSpot = async(e) => {
         e.preventDefault();
@@ -17,7 +18,6 @@ function SingleSpot() {
         history.push('/')
     };
 
-    const mySpot = useSelector((state)=>state.Spots.singleSpot)
     //basically need to pull the info of the spot that has the same id number as spotId in my url route.
     //i think i also need to grab spot images and the owner info as well per the store state shape
 
@@ -27,7 +27,11 @@ function SingleSpot() {
 
     return (
         <div>
-            <SingleSpotDetails />
+            <div>
+                <SingleSpotDetails />
+            </div>
+            <div>{mySpot}
+            </div>
         </div>
     );
 }

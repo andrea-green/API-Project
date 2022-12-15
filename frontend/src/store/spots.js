@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 const LOAD_SPOTS = "spots/LOAD_SPOTS";
 const LOAD_SPOT= "spots/LOAD_SPOT";
 const DELETE_SPOT = 'spots/DELETE_SPOT'
+const UPDATE_SPOT = 'spots/UPDATE_SPOT'
 
 
 
@@ -20,6 +21,11 @@ export const getSpotAc = (spot) => ({
 
 export const deleteSpotAc = (spot) => ({
     type:DELETE_SPOT,
+    spot
+});
+
+export const updateSpotAc = (spot) => ({
+    type:UPDATE_SPOT,
     spot
 });
 
@@ -70,11 +76,8 @@ export default function spotReducer (state = initialState, action) {
     switch(action.type) {
         //get all spots
         case LOAD_SPOTS: {
-            //const newState = {...state}
             const newState = {};
-            // console.log('allSpots')
-            // console.log('action.spots', action.spots)
-            // console.log('action.spots.Spots', action.spots.Spots)
+
             action.spots.Spots.forEach((spot)=>{
                 newState[spot.id]=spot
             });
@@ -91,12 +94,13 @@ export default function spotReducer (state = initialState, action) {
             return newState;
         };
 
-        // case create song
-        /*
-        case CREATE_SONG:{
-            const newState = {...state,allSpots:{...state,allSpots}}
-            newStatae.allSpots[action.paylod from my action creator] = action.payload from my action creator
-        } */
+        // case create new spot
+
+        case CREATE_SPOT:{
+            const newState = {...state,allSpots:{...state,allSpots}};
+            newState.allSpots[action.spot.id] = action.spot;
+            return newState;
+        };
 
         //delete spot
         case DELETE_SPOT: {
@@ -105,6 +109,14 @@ export default function spotReducer (state = initialState, action) {
             delete newState.singleSpot;
             return newState;
         };
+
+        //update spot
+        case UPDATE_SPOT:{
+            const newState = {...state, allSpots:{...state.allSpots}};
+            newState.allSpots[action.spot.id] = action.spot
+            return newState;
+        }
+
 
         default:
             return state;
