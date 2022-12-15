@@ -1,10 +1,15 @@
-import React, {useEffect} from 'react';
+import React, {useEffect,useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { getSpotsThunk } from '../../store/spots';
+import {Route} from 'react-router-dom';
+import CreateSpotForm from '../CreateSpotForm';
+import SingleSpot from '../SingleSpot/single-spot-comp';
+
 
 
 function AllSpots() {
     const dispatch = useDispatch();
+    const [showForm, setShowForm] = useState(false);
 
     // const allSpots = useSelector((state) => console.log('state.Spot',state.Spots));
     // console.log(allSpots);
@@ -24,6 +29,10 @@ function AllSpots() {
 
     return (
         <div>
+            <div>
+                hidden={showForm}
+                onClick={()=>setShowForm(true)}
+            </div>
             {allSpotsArr.map(({city,state,avgRating,price,previewImage}) => (
                 <div>
                     <div className='spot-preview-image-div'>
@@ -38,7 +47,13 @@ function AllSpots() {
                     </div>
                 </div>
                 ))};
-
+               {showForm ? (
+                    <CreateSpotForm hideForm={()=> setShowForm(false)}/>
+               ) : (
+                <Route path='/spots/:spotId'>
+                    <SingleSpot />
+                </Route>
+               )}
         </div>
     );
 };

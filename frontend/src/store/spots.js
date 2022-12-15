@@ -5,7 +5,7 @@ const LOAD_SPOTS = "spots/LOAD_SPOTS";
 const LOAD_SPOT= "spots/LOAD_SPOT";
 const DELETE_SPOT = 'spots/DELETE_SPOT';
 const UPDATE_SPOT = 'spots/UPDATE_SPOT';
-const CREATE_SPOT = 'spots/CREATE_SPOT'
+const ADD_SPOT = 'spots/ADD_SPOT'
 
 
 
@@ -28,6 +28,11 @@ export const deleteSpotAc = (spot) => ({
 export const updateSpotAc = (spot) => ({
     type:UPDATE_SPOT,
     spot
+});
+
+export const addSpotAc = (spot) => ({
+    type: ADD_SPOT,
+    spot,
 });
 
 
@@ -64,6 +69,19 @@ export const deleteSpotThunk = (spotId) =>async(dispatch)=>{
     }
 };
 
+export const createNewSpotThunk = (newSpot) => async(dispatch) =>{
+    const response = await csrfFetch('/api/spots',{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newSpot),
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(addSpotAc(data));
+        return data;
+    }
+};
+
 
 //initial states
 const initialState = {
@@ -97,7 +115,7 @@ export default function spotReducer (state = initialState, action) {
 
         // case create new spot
 
-        case CREATE_SPOT:{
+        case ADD_SPOT:{
             const newState = {...state, allSpots:{...state.allSpots}}
             // const newState = {...state, allSpots:{...state,allSpots}};
             newState.allSpots[action.spot.id] = action.spot;
