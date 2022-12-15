@@ -1,13 +1,15 @@
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { getMySpotThunk } from '../../store/spots';
-import {useParams} from 'react-router-dom';
+import {useParams,useHistory} from 'react-router-dom';
 import SingleSpotDetails from '../../css-modules/singleSpot/singleSpot';
 import { deleteSpotThunk } from '../../store/spots';
+
 
 function SingleSpot() {
     const dispatch = useDispatch();
     const { spotId } = useParams();
+    const history = useHistory(); 
 
     const deleteSpot = async(e) => {
         e.preventDefault();
