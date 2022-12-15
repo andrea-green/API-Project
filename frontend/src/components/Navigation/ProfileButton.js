@@ -5,6 +5,7 @@ import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import DemoUser from "../DemoUser";
+import CreateSpotForm from "../CreateSpotFormModal/CreateSpotForm";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -71,6 +72,11 @@ function ProfileButton({ user }) {
             itemText="Demo User"
             onItemClick={closeMenu}
             modalComponent={<DemoUser />}
+            />
+            <OpenModalMenuItem
+            itemText="List Your Property"
+            onItemClick={closeMenu}
+            modalComponent={<CreateSpotForm/>}
             />
           </>
         )}
