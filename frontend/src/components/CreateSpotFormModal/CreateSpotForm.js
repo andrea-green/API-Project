@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { createNewSpotThunk } from '../../store/spots';
+import React, { useState } from 'react';
+import { useDispatch} from 'react-redux';
 import { useModal } from "../../context/Modal";
+import * as sessionActions from "../../store/session";
+import './CreateSpotForm.css';
 
 const CreateSpotForm = ({ hideForm }) => {
     const dispatch = useDispatch();
-    const history = useHistory();
+
     const [name,setName] = useState('');
     const [address,setAddress] = useState('');
     const [city, setCity] = useState('');
@@ -36,7 +36,7 @@ const CreateSpotForm = ({ hideForm }) => {
             state,
             country,
             lat:90.0000,
-            lng:135.000,
+            lng:135.0000,
             description,
             price,
         };
