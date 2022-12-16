@@ -5,6 +5,8 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllSpots from "./components/AllSpots/allSpots";
 import SingleSpot from "./components/SingleSpot/single-spot-comp";
+import EditSpotForm from "./components/EditSpotForm/EditSpotForm";
+import CreateSpotForm from "./components/CreateSpotFormModal/CreateSpotForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,11 +21,20 @@ function App() {
       <Navigation isLoaded={isLoaded} />
         {isLoaded && (
           <Switch>
-            <Route exact path ='/spots'>
+            <Route exact path ='/'>
               <AllSpots />
             </Route>
             <Route path='/spots/:spotId'>
               <SingleSpot />
+            </Route>
+            <Route exact path ='/spots/:spotId'>
+              < EditSpotForm />
+            </Route>
+            <Route exact path ='/spots/:spotId'>
+              < CreateSpotForm />
+            </Route>
+            <Route path ='/'>
+              <AllSpots />
             </Route>
           </Switch>
         )}

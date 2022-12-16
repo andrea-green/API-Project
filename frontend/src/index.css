@@ -1,1 +1,45 @@
 /* TODO Add site wide styles */
+
+/* div {
+    display:flex;
+    flex-direction: column;
+} */
+
+.all-spots-page {
+    display:flex-box;
+    flex-direction: row;
+    justify-content: flex-start;
+    height: 323px;
+    width: 307px;
+    margin: 10px 10px
+}
+
+.spot-preview-image-div {
+    justify-content:center;
+}
+
+.city-state-div {
+    display:flex;
+    justify-self:end;
+    align-items:center;
+
+}
+
+.rating-div {
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-end;
+    padding-left:1100px;
+    padding-bottom:20px;
+    padding-top:10px;
+}
+
+.big-box-div {
+    justify-content:center
+}
+
+/* .all-spots-details {
+    display:flex;
+    justify-content: space-between;
+    margin:8px 5 px
+} */

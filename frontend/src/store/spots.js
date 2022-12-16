@@ -88,8 +88,23 @@ export const createNewSpotThunk = (newSpot,url) => async(dispatch) =>{
             dispatch(addSpotAc(spotData));
         }
     }
-    return spotResponse; 
+    return spotResponse;
 };
+
+export const updateSpotThunk = (spotId) => async(dispatch) =>{
+    const spotResponse = await csrfFetch(`/api/spots/${spotId}`,{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(spotId),
+    });
+    if(spotResponse.ok) {
+        const spotData = await spotResponse.json();
+        dispatch(updateSpotAc(spotData));
+        return spotData;
+    }
+}
+
+
 
 
 //initial states

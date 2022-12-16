@@ -10,31 +10,35 @@ function SingleSpot() {
     const dispatch = useDispatch();
     const { spotId } = useParams();
     const history = useHistory();
-    const mySpot = useSelector((state)=>state.Spots.singleSpot)
-    const sessionUser = useSelector((state)=>state.spots.singleSpot);
-    const spotOwner = useSelector((state)=> state.spots.singleSpot.ownerId);
+    const sessionUser = useSelector((state)=>state.session);
+    const spotOwner = useSelector((state)=> state.Spots.singleSpot);
     const [validationErrors,setValidationErrors] = useState([]);
 
+    useEffect(()=> {
+         dispatch(getMySpotThunk(spotId))
+    },[dispatch,spotId]);
+
     const errors = [];
-    
+
     const deleteSpot = async(e) => {
         e.preventDefault();
 
 
-        if(!sessionUser){
-            errors.push('You must be signed in to delete a spot.')
-            setValidationErrors(errors);
-        }
-        else if(!sessionUser === spotOwner){
-            errors.push('You must be the owner of this spot to delete it.')
-            setValidationErrors(errors);
-        }
-        else {
-            await dispatch(deleteSpotThunk(spotId))
-            history.push('/')
-        }
+        // if(!sessionUser){
+        //     errors.push('You must be signed in to delete a spot.')
+        //     setValidationErrors(errors);
+        // }
+        // else if(!sessionUser === spotOwner){
+        //     errors.push('You must be the owner of this spot to delete it.')
+        //     setValidationErrors(errors);
+        // }
+        // else {
+        //     await dispatch(deleteSpotThunk(spotId))
+        //     history.push('/')
+        // }
 
     }
+
     const validateUser = (e)=>{
         if(!sessionUser) {
          e.preventDefault();
@@ -46,31 +50,27 @@ function SingleSpot() {
     //basically need to pull the info of the spot that has the same id number as spotId in my url route.
     //i think i also need to grab spot images and the owner info as well per the store state shape
 
-        useEffect(()=> {
-            dispatch(getMySpotThunk(spotId))
-        },[dispatch,spotId]);
-
-        return (
+    return (
+         <div>
             <div>
-                <div>
-                    <SingleSpotDetails />
-                </div>
-                <div>
-                    <ul className='errors-list'>
-                        {validationErrors.map((error)=> (
-                            <li key={error}>{error} </li>
-                        ))};
-                    </ul>
-                </div>
-                <div>
-                    {mySpot}
-                </div>
-                <button onClick={deleteSpot}>Delete Spot</button>
-                <div>
-                    <NavLink onClick={validateUser}to={`/spots/${spotId}/edit`}>Edit Spot</NavLink>
-                </div>
+                 <SingleSpotDetails />
             </div>
-        );
+              <div>
+                 <ul className='errors-list'>
+                     {validationErrors.map((error)=> (
+                        <li key={error}>{error} </li>
+                     ))};
+                </ul>
+            </div>
+            {/* <div>
+                   {mySpot.address}
+             </div> */}
+             <button onClick={deleteSpot}>Delete Spot</button>
+             <div>
+                 <NavLink onClick={validateUser}to={`/spots/${spotId}/edit`}>Edit Spot</NavLink>
+            </div>
+        </div>
+    );
     }
 
 export default SingleSpot

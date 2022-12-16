@@ -7,7 +7,7 @@ import { createNewSpotThunk } from '../../store/spots';
 import { useHistory } from 'react-router-dom';
 
 
-const CreateSpotForm = ({ hideForm }) => {
+const CreateSpotForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -47,12 +47,12 @@ const CreateSpotForm = ({ hideForm }) => {
             price,
         };
         return dispatch(createNewSpotThunk(myNewSpot,url))
-        // let newListing = await dispatch(createNewSpotThunk(myNewSpot,url));
-        /* if(newListing){
-            history.push(`/api/spots/${myNewSpot.id})
-        } */
-            .then(history.push(`/api/spots/${myNewSpot.id}`))
+            .then(history.push(`/api/spots`))
             .then(closeModal)
+            .catch(async (res) => {
+                const data = await res.json();
+                if(data && data.errors) setErrors(data.errors);
+            });
     };
 
     return (
