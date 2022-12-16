@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -8,7 +9,7 @@ import * as sessionActions from "../../store/session";
 
 
 
-const EditSpotForm = () => {
+const DeleteSpotForm = () => {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
     const history = useHistory();
@@ -23,7 +24,7 @@ const EditSpotForm = () => {
     const [state, setState] = useState('');
     const [country, setCountry] = useState('');
     const [description, setDescription] = useState('');
-    const [price, setPrice] = useState(1);
+    const [price, setPrice] = useState();
 
     const [errorValidations, setErrorValidations] = useState([]);
 
@@ -46,7 +47,7 @@ const EditSpotForm = () => {
         if (description.length === 0) errors.push("You must enter a valid description.");
         if (price <= 0) errors.push("You must enter a valid price.");
 
-     setErrorValidations(errors);
+        setErrorValidations(errors);
     }, [name, address, city, state, country, description, price]);
 
 
@@ -54,6 +55,7 @@ const EditSpotForm = () => {
         e.preventDefault();
 
         const modifiedSpot = {
+            id: spotId,
             name,
             address,
             city,
@@ -64,15 +66,6 @@ const EditSpotForm = () => {
             lat: 90.0000,
             lng: 135.0000,
         }
-        const {id, Owner,SpotImages,numReviews,avgStarRating} = mySpot
-
-        const spotAddDetails = {
-            id,
-            Owner,
-            numReviews,
-            avgStarRating,
-            SpotImages
-        }
 
         // const editSpot = async(e) => {
         //     e.preventDefault();
@@ -81,13 +74,17 @@ const EditSpotForm = () => {
         //         setValidationErrors(errors)
         //     }
         // };
-        let updatedSpot = await dispatch(updateSpotThunk(modifiedSpot,spotAddDetails))
-            .then(history.push(`/spots/${id}`))
+        let updatedSpot = await dispatch(updateSpotThunk(modifiedSpot))
+            .then(history.push(`/api/spots/${spotId}`))
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrorValidations(data.errors);
             });
+
+        if (updatedSpot) {
+            history.push(`/api/spots/${spotId}`)
+        }
     };
 
     return (
@@ -179,4 +176,4 @@ const EditSpotForm = () => {
     )
 }
 
-export default EditSpotForm;
+export default DeleteSpotForm;

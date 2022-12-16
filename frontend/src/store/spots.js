@@ -91,17 +91,19 @@ export const createNewSpotThunk = (newSpot,url) => async(dispatch) =>{
     return spotResponse;
 };
 
-export const updateSpotThunk = (spotId) => async(dispatch) =>{
-    const spotResponse = await csrfFetch(`/api/spots/${spotId}`,{
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(spotId),
+export const updateSpotThunk = (modifiedSpot,spotAddDetails) => async(dispatch) =>{
+    const spotResponse = await csrfFetch(`/api/spots/${spotAddDetails.id}`,{
+        method: 'PUT',
+        // headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(modifiedSpot),
     });
     if(spotResponse.ok) {
         const spotData = await spotResponse.json();
-        dispatch(updateSpotAc(spotData));
-        return spotData;
+        const updatedSpot = {...spotData,...spotAddDetails }
+        dispatch(updateSpotAc(updatedSpot));
+        return updatedSpot;
     }
+    return spotResponse;
 }
 
 
@@ -156,8 +158,9 @@ export default function spotReducer (state = initialState, action) {
 
         //update spot
         case UPDATE_SPOT:{
-            const newState = {...state, allSpots:{...state.allSpots}};
+            const newState = {...state, singleSpot:{}};
             newState.allSpots[action.spot.id] = action.spot
+            newState.singleSpot = action.spot
             return newState;
         }
 
