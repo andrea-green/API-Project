@@ -10,27 +10,26 @@ const ADD_SPOT = 'spots/ADD_SPOT'
 
 
 //action creators
-export const getAllSpotsAc = (spots) => ({
+const getAllSpotsAc = (spots) => ({
         type: LOAD_SPOTS,
         spots
 });
 
-export const getSpotAc = (spot) => ({
+const getSpotAc = (spot) => ({
         type:LOAD_SPOT,
         spot
 });
 
-export const deleteSpotAc = (spot) => ({
+const deleteSpotAc = (spot) => ({
     type:DELETE_SPOT,
     spot
 });
-
-export const updateSpotAc = (spot) => ({
+const updateSpotAc = (spot) => ({
     type:UPDATE_SPOT,
     spot
 });
 
-export const addSpotAc = (spot) => ({
+const addSpotAc = (spot) => ({
     type: ADD_SPOT,
     spot,
 });
@@ -69,17 +68,27 @@ export const deleteSpotThunk = (spotId) =>async(dispatch)=>{
     }
 };
 
-export const createNewSpotThunk = (newSpot) => async(dispatch) =>{
-    const response = await csrfFetch('/api/spots',{
+export const createNewSpotThunk = (newSpot,url) => async(dispatch) =>{
+    const spotResponse = await csrfFetch('/api/spots',{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newSpot),
     });
-    if (response.ok) {
-        const data = await response.json();
-        dispatch(addSpotAc(data));
-        return data;
+    if (spotResponse.ok) {
+        const spotData = await spotResponse.json();
+        // console.log('spotData', spotData)
+        const spotImageResponse = await csrfFetch(`/api/spots/${spotData.id}/images`,{
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({url,preview:true}),
+        });
+        if(spotImageResponse.ok) {
+            const spotImgData = await spotImageResponse.json();
+            spotData.previewImage = spotImgData.url;
+            dispatch(addSpotAc(spotData));
+        }
     }
+    return spotResponse; 
 };
 
 

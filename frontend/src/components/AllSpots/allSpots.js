@@ -28,8 +28,8 @@ function AllSpots() {
 
     return (
         <div>
-            {allSpotsArr.map(({city,state,avgRating,price,previewImage}) => (
-                <div>
+            {allSpotsArr.map(({id,city,state,avgRating,price,previewImage}) => (
+                <div key={id}>
                     <div className='spot-preview-image-div'>
                          <img src={previewImage}></img>
                     </div>

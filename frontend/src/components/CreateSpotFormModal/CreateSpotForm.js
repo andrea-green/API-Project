@@ -3,9 +3,13 @@ import { useDispatch} from 'react-redux';
 import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../store/session";
 import './CreateSpotForm.css';
+import { createNewSpotThunk } from '../../store/spots';
+import { useHistory } from 'react-router-dom';
+
 
 const CreateSpotForm = ({ hideForm }) => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const [name,setName] = useState('');
     const [address,setAddress] = useState('');
@@ -13,7 +17,8 @@ const CreateSpotForm = ({ hideForm }) => {
     const [state,setState] = useState('');
     const [country,setCountry] = useState('');
     const [description,setDescription] = useState('');
-    const [price,setPrice] = useState();
+    const [price,setPrice] = useState(1);
+    const [url,setUrl] = useState('');
     const [errors,setErrors] = useState([]);
     const { closeModal } = useModal();
 
@@ -24,11 +29,12 @@ const CreateSpotForm = ({ hideForm }) => {
     const updateName = (e) => setName(e.target.value);
     const updateDescription = (e) => setDescription(e.target.value);
     const updatePrice = (e) => setPrice(e.target.value);
+    const updateUrl = (e) => setUrl(e.target.value);
 
     //submit click
     const handleSubmit = async(e)=>{
         e.preventDefault();
-
+        setErrors([]);
         const myNewSpot = {
             name,
             address,
@@ -40,13 +46,15 @@ const CreateSpotForm = ({ hideForm }) => {
             description,
             price,
         };
+        return dispatch(createNewSpotThunk(myNewSpot,url))
+        // let newListing = await dispatch(createNewSpotThunk(myNewSpot,url));
+        /* if(newListing){
+            history.push(`/api/spots/${myNewSpot.id})
+        } */
+            .then(history.push(`/api/spots/${myNewSpot.id}`))
+            .then(closeModal)
     };
 
-    //cancel click
-    const handleCancelClick = (e) => {
-        e.preventDefault();
-        hideForm();
-      };
     return (
         <>
             <h1>List your home</h1>
@@ -122,13 +130,17 @@ const CreateSpotForm = ({ hideForm }) => {
                             onChange={updatePrice}
                         />
                     </label>
+                    <label>
+                        preview image link
+                        <input
+                            type="text"
+                            placeholder="preview image link"
+                            required
+                            value={url}
+                            onChange={updateUrl}
+                        />
+                    </label>
                     <button type="submit">Create new Spot</button>
-                    <button
-                        type="button"
-                        onClick={handleCancelClick}
-                    >
-                        Cancel
-                        </button>
                 </form>
             </section>
 

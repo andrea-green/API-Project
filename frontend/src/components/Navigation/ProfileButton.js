@@ -52,6 +52,11 @@ function ProfileButton({ user }) {
             <li>{user.username}</li>
             <li>{user.firstName} {user.lastName}</li>
             <li>{user.email}</li>
+            <OpenModalMenuItem
+            itemText="List Your Property"
+            onItemClick={closeMenu}
+            modalComponent={<CreateSpotForm/>}
+            />
             <li>
               <button onClick={logout}>Log Out</button>
             </li>
@@ -72,11 +77,6 @@ function ProfileButton({ user }) {
             itemText="Demo User"
             onItemClick={closeMenu}
             modalComponent={<DemoUser />}
-            />
-            <OpenModalMenuItem
-            itemText="List Your Property"
-            onItemClick={closeMenu}
-            modalComponent={<CreateSpotForm/>}
             />
           </>
         )}
