@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMySpotThunk, deleteSpotThunk } from '../../store/spots';
-import { useParams, useHistory, NavLink } from 'react-router-dom';
+import { getMySpotThunk} from '../../store/spots';
+import { useParams, useHistory} from 'react-router-dom';
 import SingleSpotDetails from '../../css-modules/singleSpot/singleSpot';
 import OpenModalButton from '../OpenModalButton';
 
@@ -13,7 +13,7 @@ import DeleteSpotForm from '../DeleteSpotForm/delete-spot-form';
 function SingleSpot() {
     const user = useSelector((state) => state.session.user);
     const mySpot = useSelector((state) => state.Spots.singleSpot);
-    // console.log('mySpot', mySpot)//
+
     const dispatch = useDispatch();
     const { spotId } = useParams();
     const history = useHistory();
@@ -24,38 +24,7 @@ function SingleSpot() {
         .catch(()=> history.push('/PageNotFound'))
     }, [dispatch, spotId]);
 
-    const errors = [];
 
-    const handleDelete = async (e) => {
-        e.preventDefault();
-
-
-        // if(!sessionUser){
-        //     errors.push('You must be signed in to delete a spot.')
-        //     setValidationErrors(errors);
-        // }
-        // else if(!sessionUser === spotOwner){
-        //     errors.push('You must be the owner of this spot to delete it.')
-        //     setValidationErrors(errors);
-        // }
-        // else {
-        //     await dispatch(deleteSpotThunk(spotId))
-        //     history.push('/')
-        // }
-
-    }
-
-    // const validateUser = (e)=>{
-    //     if(!sessionUser) {
-    //      e.preventDefault();
-    //      errors.push('You must be logged in to edit a spot');
-    //         setValidationErrors(errors);
-    //     }
-    // }
-
-
-    //basically need to pull the info of the spot that has the same id number as spotId in my url route.
-    //i think i also need to grab spot images and the owner info as well per the store state shape
     if (!mySpot?.id) return null;
     return (
         <div>
