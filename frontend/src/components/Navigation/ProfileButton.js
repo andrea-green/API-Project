@@ -6,6 +6,8 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import DemoUser from "../DemoUser";
 import CreateSpotForm from "../CreateSpotFormModal/CreateSpotForm";
+import UserReviewsModal from "../Review/user-reviews";
+import { getUserReviewsThunk } from "../../store/reviews.js"
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -39,6 +41,12 @@ function ProfileButton({ user }) {
     const closeMenu = () => setShowMenu(false);
   };
 
+  const userReviews = (e) => {
+    e.preventDefault();
+    dispatch(getUserReviewsThunk())
+    closeMenu();
+  }
+
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
@@ -53,13 +61,18 @@ function ProfileButton({ user }) {
             <li>{user.firstName} {user.lastName}</li>
             <li>{user.email}</li>
             <OpenModalMenuItem
-            itemText="List Your Property"
-            onItemClick={closeMenu}
-            modalComponent={<CreateSpotForm/>}
+              itemText="List Your Property"
+              onItemClick={closeMenu}
+              modalComponent={<CreateSpotForm />}
             />
             <li>
               <button onClick={logout}>Log Out</button>
             </li>
+            <OpenModalMenuItem
+              itemText="My Reviews"
+              onItemClick={closeMenu}
+              modalComponent={<UserReviewsModal />}
+            />
           </>
         ) : (
           <>
@@ -74,9 +87,9 @@ function ProfileButton({ user }) {
               modalComponent={<SignupFormModal />}
             />
             <OpenModalMenuItem
-            itemText="Demo User"
-            onItemClick={closeMenu}
-            modalComponent={<DemoUser />}
+              itemText="Demo User"
+              onItemClick={closeMenu}
+              modalComponent={<DemoUser />}
             />
           </>
         )}

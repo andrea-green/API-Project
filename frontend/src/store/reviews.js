@@ -2,6 +2,7 @@ import {csrfFetch } from './csrf';
 
 //const variables
 const GET_REVIEWS = '/reviews/GET_REVIEWS';
+const GET_USERREVIEWS = '/reviews/GET_USERREVIEWS';
 
 
 //action creators
@@ -9,7 +10,12 @@ const GET_REVIEWS = '/reviews/GET_REVIEWS';
 const getSpotReviewsAc = (reviews) => ({
     type:GET_REVIEWS,
     reviews
-})
+});
+
+const getUserReviewsAc = (userReviews) => ({
+    type: GET_USERREVIEWS,
+    userReviews
+});
 
 
 //thunks
@@ -20,8 +26,16 @@ export const getSpotReviewsThunk = (spotId) =>async (dispatch) =>{
     if (response.ok) {
         const data = await response.json();
         dispatch(getSpotReviewsAc(data.Reviews))
-        return data;
     }
+};
+
+export const getUserReviewsThunk = () =>async(dispatch)=>{
+    const response = await csrfFetch(`/api/reviews/current`);
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(getUserReviewsAc(data.Reviews))
+    }
+    return response;
 };
 
 
@@ -45,6 +59,15 @@ export default function reviewReducer(state=initialState,action){
             });
             return newState;
         };
+
+        //get all current user reviews.
+        case GET_USERREVIEWS:{
+            const newState = {...state, user:{}};
+            action.userReviews.forEach(review =>{
+                newState.user[review.id]= review
+            });
+            return newState
+        }
         default:
             return state;
     };

@@ -2,7 +2,7 @@ import './allreviews.css';
 import React, { useEffect,useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory,useParams } from 'react-router-dom';
-import Review from './single-review-comp';
+import Review from './create-review';
 import { getSpotReviewsThunk } from '../../store/reviews';
 
 
