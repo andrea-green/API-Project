@@ -47,7 +47,7 @@ const CreateSpotForm = () => {
             price,
         };
         return dispatch(createNewSpotThunk(myNewSpot,url))
-            .then(history.push(`/`))
+            .then((res) => history.push(`/spots/${res.id}`))
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();

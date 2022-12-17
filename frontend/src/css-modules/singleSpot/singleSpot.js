@@ -6,7 +6,11 @@ import { useSelector } from "react-redux";
     // const { city,state,avgRating,price,previewImage } = useParams()
     // need to deconstruct so that i can just reference those things.
 
-    const spot = useSelector((state)=>state.Spots.singleSpot)
+    const spot = useSelector((state)=>state.Spots.singleSpot);
+    console.log('spot',spot);
+
+    // const spotPic = useSelector((state)=>state.SpotImages.url)
+    const spotPic = spot.SpotImages.find(imgObj => imgObj.preview===true)
 
     return (
         <div>
@@ -22,10 +26,8 @@ import { useSelector } from "react-redux";
             </div>
 
             <div className='spot-preview-image-div'>
-                <img src={spot.previewImage}></img>
+                <img src={spotPic.url}></img>
             </div>
-
-
         </div>
     )
 }

@@ -59,7 +59,7 @@ function SingleSpot() {
                     <ul className='errors-list'>
                         {validationErrors.map((error)=> (
                             <li key={error}>{error} </li>
-                        ))};
+                        ))}
                     </ul>
                 </div>
                 <div>

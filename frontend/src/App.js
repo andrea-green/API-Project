@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Switch,Route } from "react-router-dom";
+import { Switch,Route,Link } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllSpots from "./components/AllSpots/allSpots";
@@ -34,7 +34,10 @@ function App() {
               < CreateSpotForm />
             </Route>
             <Route path ='/'>
-              <AllSpots />
+              <div className='404Error'>
+                <h1>404 Page Not Found</h1>
+                <Link to={'/'}>Return home</Link>
+              </div>
             </Route>
           </Switch>
         )}

@@ -86,6 +86,7 @@ export const createNewSpotThunk = (newSpot, url) => async (dispatch) => {
             const spotImgData = await spotImageResponse.json();
             spotData.previewImage = spotImgData.url;
             dispatch(addSpotAc(spotData));
+            return spotData; 
         }
     }
     return spotResponse;
