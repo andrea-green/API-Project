@@ -55,7 +55,7 @@ function SingleSpot() {
 
     //basically need to pull the info of the spot that has the same id number as spotId in my url route.
     //i think i also need to grab spot images and the owner info as well per the store state shape
-    if (!mySpot) return null;
+    if (!mySpot.id) return null;
     return (
         <div>
             <div>

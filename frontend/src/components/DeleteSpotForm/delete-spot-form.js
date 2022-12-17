@@ -54,7 +54,7 @@ const DeleteSpotForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await dispatch(deleteSpotThunk(mySpot.id))
-            .then(history.push(`/spots`))
+            .then(history.push(`/`))
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();
