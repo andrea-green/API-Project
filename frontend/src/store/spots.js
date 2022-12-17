@@ -44,7 +44,6 @@ export const getSpotsThunk = () => async (dispatch) => {
         const data = await response.json();
         dispatch(getAllSpotsAc(data))
         return data;
-
     }
 };
 
@@ -86,7 +85,7 @@ export const createNewSpotThunk = (newSpot, url) => async (dispatch) => {
             const spotImgData = await spotImageResponse.json();
             spotData.previewImage = spotImgData.url;
             dispatch(addSpotAc(spotData));
-            return spotData; 
+            return spotData;
         }
     }
     return spotResponse;

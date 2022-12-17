@@ -7,7 +7,7 @@ import AllSpots from "./components/AllSpots/allSpots";
 import SingleSpot from "./components/SingleSpot/single-spot-comp";
 import EditSpotForm from "./components/EditSpotForm/EditSpotForm";
 import CreateSpotForm from "./components/CreateSpotFormModal/CreateSpotForm";
-import Review from "./components/Review/Review-component";
+import AllReviews from "./components/Review/AllReviews-comp.js";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,13 +27,7 @@ function App() {
             </Route>
             <Route path='/spots/:spotId'>
               <SingleSpot />
-            </Route>
-            <Route exact path ='/spots/:spotId'>
-              < EditSpotForm />
-              <Review />
-            </Route>
-            <Route exact path ='/'>
-              < CreateSpotForm />
+              <AllReviews />
             </Route>
             <Route path ='/'>
               <div className='404Error'>

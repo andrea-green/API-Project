@@ -13,7 +13,10 @@ function Review() {
     const history = useHistory();
     const [validationErrors, setValidationErrors] = useState([]);
 
-    
+    // useEffect(()=> {
+    //     .c
+    // })
+
     return <div>
         <h1>herro</h1>
     </div>;
