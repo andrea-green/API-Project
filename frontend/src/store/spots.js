@@ -20,9 +20,9 @@ const getSpotAc = (spot) => ({
         spot
 });
 
-const deleteSpotAc = (spot) => ({
+const deleteSpotAc = (spotId) => ({
     type:DELETE_SPOT,
-    spot
+    spotId
 });
 const updateSpotAc = (spot) => ({
     type:UPDATE_SPOT,
@@ -63,9 +63,9 @@ export const deleteSpotThunk = (spotId) =>async(dispatch)=>{
         method:'DELETE'
     })
     if(response.ok){
-        await response.json();
         dispatch(deleteSpotAc(spotId))
     }
+    return response;
 };
 
 export const createNewSpotThunk = (newSpot,url) => async(dispatch) =>{
@@ -150,9 +150,8 @@ export default function spotReducer (state = initialState, action) {
 
         //delete spot
         case DELETE_SPOT: {
-            const newState = {...state};
+            const newState = {...state, singleSpot:{}};
             delete newState.allSpots[action.spotId];
-            delete newState.singleSpot;
             return newState;
         };
 

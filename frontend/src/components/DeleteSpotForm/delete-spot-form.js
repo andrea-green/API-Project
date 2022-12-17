@@ -1,11 +1,10 @@
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useModal } from "../../context/Modal";
-import { updateSpotThunk } from '../../store/spots';
 import { useParams } from 'react-router-dom';
-import * as sessionActions from "../../store/session";
+import { deleteSpotThunk } from '../../store/spots';
 
 
 
@@ -14,165 +13,94 @@ const DeleteSpotForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const { spotId } = useParams();
-    const user = useSelector((state) => state.session.user);
+
+    // const user = useSelector((state) => state.session.user);
     const mySpot = useSelector((state) => state.Spots.singleSpot);
 
-    const [name, setName] = useState('');
-    const [address, setAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [country, setCountry] = useState('');
-    const [description, setDescription] = useState('');
-    const [price, setPrice] = useState();
+    const [boolean, setBoolean] = useState(false);
+    // const [address, setAddress] = useState('');
+    // const [city, setCity] = useState('');
+    // const [state, setState] = useState('');
+    // const [country, setCountry] = useState('');
+    // const [description, setDescription] = useState('');
+    // const [price, setPrice] = useState();
 
     const [errorValidations, setErrorValidations] = useState([]);
 
-    const updateAddress = (e) => setAddress(e.target.value);
-    const updateCity = (e) => setCity(e.target.value);
-    const updateState = (e) => setState(e.target.value);
-    const updateCountry = (e) => setCountry(e.target.value);
-    const updateName = (e) => setName(e.target.value);
-    const updateDescription = (e) => setDescription(e.target.value);
-    const updatePrice = (e) => setPrice(e.target.value);
+    const trueBoolean = (e) => setBoolean(true);
+    const falseBoolean = (e) => setBoolean(false);
+    // const updateCity = (e) => setCity(e.target.value);
+    // const updateState = (e) => setState(e.target.value);
+    // const updateCountry = (e) => setCountry(e.target.value);
+    // const updateName = (e) => setName(e.target.value);
+    // const updateDescription = (e) => setDescription(e.target.value);
+    // const updatePrice = (e) => setPrice(e.target.value);
 
 
-    useEffect(() => {
-        const errors = [];
-        if (name.length === 0) errors.push("You must enter a name.");
-        if (address.length === 0) errors.push("You must enter an address.");
-        if (city.length === 0) errors.push("You must enter a city.");
-        if (state.length === 0) errors.push("You must enter a valid state.");
-        if (country.length === 0) errors.push("You must enter a valid country.");
-        if (description.length === 0) errors.push("You must enter a valid description.");
-        if (price <= 0) errors.push("You must enter a valid price.");
+    // useEffect(() => {
+    //     const errors = [];
+    //     if (name.length === 0) errors.push("You must enter a name.");
+    //     if (address.length === 0) errors.push("You must enter an address.");
+    //     if (city.length === 0) errors.push("You must enter a city.");
+    //     if (state.length === 0) errors.push("You must enter a valid state.");
+    //     if (country.length === 0) errors.push("You must enter a valid country.");
+    //     if (description.length === 0) errors.push("You must enter a valid description.");
+    //     if (price <= 0) errors.push("You must enter a valid price.");
 
-        setErrorValidations(errors);
-    }, [name, address, city, state, country, description, price]);
+    //     setErrorValidations(errors);
+    // }, [name, address, city, state, country, description, price]);
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const modifiedSpot = {
-            id: spotId,
-            name,
-            address,
-            city,
-            state,
-            country,
-            description,
-            price,
-            lat: 90.0000,
-            lng: 135.0000,
-        }
-
-        // const editSpot = async(e) => {
-        //     e.preventDefault();
-        //     if (user.id !== mySpot.Owner.id) {
-        //         errors.push('You must be the owner to edit this spot')
-        //         setValidationErrors(errors)
-        //     }
-        // };
-        let updatedSpot = await dispatch(updateSpotThunk(modifiedSpot))
-            .then(history.push(`/api/spots/${spotId}`))
+        await dispatch(deleteSpotThunk(mySpot.id))
+            .then(history.push(`/spots`))
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrorValidations(data.errors);
             });
-
-        if (updatedSpot) {
-            history.push(`/api/spots/${spotId}`)
-        }
     };
 
     return (
-        <>
-            <h1>Edit your listing</h1>
-            <section className='edit-spot-form'>
-                <div className='owner-edit-form'>
-                    <ul> {errorValidations.map((error) => (
-                        <li key={error}>{error}</li>
-                    ))}
-                    </ul>
-                </div>
-                <form onSubmit={handleSubmit}>
-                    <label>
-                        name
-                        <input
-                            type="text"
-
-                            required
-                            value={name}
-                            onChange={updateName}
-                        />
-                    </label>
-                    <label>
-                        address
-                        <input
-                            type="text"
-
-                            required
-                            value={address}
-                            onChange={updateAddress}
-                        />
-                    </label>
-                    <label>
-                        city
-                        <input
-                            type="text"
-                            required
-                            value={city}
-                            onChange={updateCity}
-                        />
-                    </label>
-                    <label>
-                        state
-                        <input
-                            type="text"
-
-                            required
-                            value={state}
-                            onChange={updateState}
-                        />
-                    </label>
-                    <label>
-                        Country
-                        <input
-                            type="text"
-
-                            required
-                            value={country}
-                            onChange={updateCountry}
-                        />
-                    </label>
-                    <label>
-                        Description
-                        <input
-                            type="text"
-
-                            required
-                            value={description}
-                            onChange={updateDescription}
-                        />
-                    </label>
-                    <label>
-                        price
-                        <input
-                            type="number"
-
-                            required
-                            value={price}
-                            onChange={updatePrice}
-                        />
-                    </label>
-
-                    <button type="submit">Save changes</button>
-                </form>
+        <div>
+            <h1>Are you sure you want to delete?</h1>
+            <section className='delete-spot-form'>
+                    <div className='delete-errors'>
+                        <ul>{errorValidations.map((error) => (
+                            <li key={error}>{error}</li>
+                        ))}
+                        </ul>
+                    </div>
+                    <form onSubmit={handleSubmit}>
+                        <label>
+                            No
+                            <input
+                                type="radio"
+                                required
+                                checked={boolean ? false : true }
+                                onChange={falseBoolean}
+                            />
+                        </label>
+                        <label>
+                            Yes
+                            <input
+                                type="radio"
+                                required
+                                checked={boolean}
+                                onChange={trueBoolean}
+                            />
+                        </label>
+                        <button
+                        type="submit"
+                        disabled={!boolean}
+                        >Confirm</button>
+                    </form>
             </section>
 
-        </>
+
+        </div>
+
     )
 }
 

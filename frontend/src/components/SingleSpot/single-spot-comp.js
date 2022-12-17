@@ -61,7 +61,7 @@ function SingleSpot() {
             <div>
                 <SingleSpotDetails />
             </div>
-             <div>
+            <div>
                 <ul className='errors-list'>
                     {validationErrors.map((error) => (
                         <li key={error}>{error} </li>
@@ -82,21 +82,26 @@ function SingleSpot() {
                     </div>
                     <div className='number-of-reviews'>
                         <div>
-                           {`${mySpot.numReviews} Reviews`}
+                            {`${mySpot.numReviews} Reviews`}
                         </div>
                     </div>
                 </div>
 
                 {user && user?.id === mySpot?.Owner?.id ? (
-                <div>
-                    <div>{<OpenModalButton
-                    modalComponent={<EditSpotForm/>}
-                    buttonText='Edit Spot'/>}</div>
-                    <div>{<OpenModalButton
-                    modalComponent={<DeleteSpotForm/>}
-                    buttonText='Delete Spot '/>}</div>
-                </div>
-                ): (<div>Hello</div>) }
+                    <div>
+                        <div>{<OpenModalButton
+                            modalComponent={<EditSpotForm />}
+                            buttonText='Edit Spot' />}</div>
+                        <div>{<OpenModalButton
+                            modalComponent={<DeleteSpotForm />}
+                            buttonText='Delete Spot ' />}</div>
+                    </div>
+                ) : (
+                    <div className='fees-div'>
+                        <div>{`cleaning fee = $${25}`}</div>
+                        <div>{`Service fee = $${100}`}</div>
+                    </div>
+                )}
             </div>
         </div>
 
