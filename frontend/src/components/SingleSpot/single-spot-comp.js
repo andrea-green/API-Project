@@ -45,10 +45,10 @@ function SingleSpot() {
             <div className='spot-modal-info'>
                 <div className='spot-modal-info-header'>
                     <div className='price-per-night'>
-                        <div>
+                        <h1>
                             {`$${mySpot.price} night`}
 
-                        </div>
+                        </h1>
                     </div>
                     <div className='average-spot-rating'>
                         <div>{mySpot.avgRating}</div>

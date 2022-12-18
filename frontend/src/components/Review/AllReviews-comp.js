@@ -11,6 +11,7 @@ function AllReviews() {
     const history = useHistory();
     const { spotId } = useParams();
     const spotReviews = useSelector((state)=>state.Reviews.spot);
+    const spotReviewsArr=Object.values(spotReviews);
     const user = useSelector((state)=>state.session.user);
     const [validationErrors, setValidationErrors] = useState([]);
 
@@ -20,9 +21,20 @@ function AllReviews() {
 
     return (
         <div>
-            <div>
-                <h1>herrow reviews here</h1>
+            <div className='all-reviews-outer-div'>
+                <h1>Reviews</h1>
+                <div>
+                    {spotReviewsArr.map(({id,review,stars})=>(
+                        <div key={id} className='individual-review-div'>
+                            <div>
+                                <div className='user-review-div'>{review}</div>
+                                <div className='user-star-rating-div'>{stars}</div>
+                            </div>
+                        </div>
 
+
+                    ))}
+                </div>
             </div>
         </div>
     );
