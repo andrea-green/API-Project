@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useModal } from "../../context/Modal";
 import { deleteReviewThunk } from '../../store/reviews';
 
@@ -9,7 +9,7 @@ import { deleteReviewThunk } from '../../store/reviews';
 
 const DeleteReviewForm = ({ myReview }) => {
     const { closeModal } = useModal();
-    // const { spotId } = useParams();
+
     const mySingleSpot = useSelector((state)=>state.Spots.singleSpot)
     const dispatch = useDispatch();
     const history = useHistory();
@@ -17,7 +17,7 @@ const DeleteReviewForm = ({ myReview }) => {
     const [errorValidations, setErrorValidations] = useState([]);
     const trueBoolean = (e) => setBoolean(true);
     const falseBoolean = (e) => setBoolean(false);
-    // console.log('spotId',spotId);
+
 
 
     const handleSubmit = async (e) => {

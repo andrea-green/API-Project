@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useModal } from "../../context/Modal";
 import { updateSpotThunk } from '../../store/spots';
-import { useParams } from 'react-router-dom';
-import * as sessionActions from "../../store/session";
+
 
 
 
@@ -13,8 +12,8 @@ const EditSpotForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const { spotId } = useParams();
-    const user = useSelector((state) => state.session.user);
+
+
     const mySpot = useSelector((state) => state.Spots.singleSpot);
 
     const [name, setName] = useState('');
@@ -74,14 +73,7 @@ const EditSpotForm = () => {
             SpotImages
         }
 
-        // const editSpot = async(e) => {
-        //     e.preventDefault();
-        //     if (user.id !== mySpot.Owner.id) {
-        //         errors.push('You must be the owner to edit this spot')
-        //         setValidationErrors(errors)
-        //     }
-        // };
-        let updatedSpot = await dispatch(updateSpotThunk(modifiedSpot,spotAddDetails))
+        await dispatch(updateSpotThunk(modifiedSpot,spotAddDetails))
             .then(history.push(`/spots/${id}`))
             .then(closeModal)
             .catch(async (res) => {

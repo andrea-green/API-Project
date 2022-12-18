@@ -1,19 +1,18 @@
 import './allreviews.css';
-import React, { useEffect,useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory,useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getSpotReviewsThunk } from '../../store/reviews';
 
 
 function AllReviews() {
 
     const dispatch = useDispatch();
-    const history = useHistory();
+
     const { spotId } = useParams();
     const spotReviews = useSelector((state)=>state.Reviews.spot);
     const spotReviewsArr=Object.values(spotReviews);
-    const user = useSelector((state)=>state.session.user);
-    const [validationErrors, setValidationErrors] = useState([]);
+
 
     useEffect(() => {
         dispatch(getSpotReviewsThunk(spotId))

@@ -129,7 +129,7 @@ router.get('/', async(req,res)=>{
         where.price[Op.lte] = maxPrice;
     };
 
-    // console.log(where);
+
 
     if(Object.keys(errors).length) {
         res.status(400)
@@ -145,7 +145,7 @@ router.get('/', async(req,res)=>{
 
     const spots = await Spot.findAll({where,...pagination});
 
-    // console.log('spots route', spots);
+
 
     let spotsList = [];
     spots.forEach(spot =>{
@@ -196,15 +196,8 @@ router.get('/', async(req,res)=>{
         };
 
 
-        // allSpots.push(spot);
-        // if(spot === spotsList[spotsList.length-1]) {
-        //     console.log('allSpots route', allSpots)
-        //     return res.json({Spots:allSpots,page,size})
-        // }
-
          allSpots.push(spot);
         if(allSpots.length === spotsList.length) {
-            console.log('allSpots route', allSpots)
             return res.json({Spots:allSpots,page,size})
         }
 
@@ -322,7 +315,7 @@ router.get('/:spotId',async(req,res)=>{
             attributes: ["id", "firstName", "lastName"]
         }]
     });
-    console.log(mySpot);
+
 
     if(!mySpot){
         res.statusCode = 404;
@@ -438,7 +431,7 @@ router.post('/:spotId/reviews', validateReview, requireAuth, async(req,res) =>{
     // make sure review is valid. -> make a new validReview variable, just like 90-38 in spots.js.
     const { review, stars } = req.body;
     const mySpot = await Spot.findByPk(req.params.spotId);
-    console.log(mySpot);
+
     // make sure the spot exists -> check if spot variable is falsey.
     if(!mySpot){
         res.statusCode = 404;

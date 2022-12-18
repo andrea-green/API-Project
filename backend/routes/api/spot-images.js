@@ -19,11 +19,7 @@ router.delete('/:imageId', requireAuth, async(req,res)=>{
         })
     };
     const image = myImage.toJSON();
-    // console.log('image',image)
-    // const imageSpotId = Object.values(image);
 
-    // console.log(myImage);
-    // console.log(imageSpotId);
     const mySpot = await Spot.findOne({
         where:{
             ownerId:req.user.id,

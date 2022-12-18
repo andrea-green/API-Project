@@ -1,5 +1,5 @@
 import React from "react";
-// import styles from './singleSpot.module.css';
+
 import { useSelector } from "react-redux";
 
  function SingleSpotDetails() {
@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
     // need to deconstruct so that i can just reference those things.
 
     const spot = useSelector((state)=>state.Spots.singleSpot);
-    console.log('spot',spot);
 
     // const spotPic = useSelector((state)=>state.SpotImages.url)
     const spotPic = spot.SpotImages.find(imgObj => imgObj.preview===true)
@@ -26,7 +25,7 @@ import { useSelector } from "react-redux";
             </div>
 
             <div className='spot-preview-image-div'>
-                <img src={spotPic.url}></img>
+                <img src={spotPic.url} alt='spot-pic-url'></img>
             </div>
         </div>
     )

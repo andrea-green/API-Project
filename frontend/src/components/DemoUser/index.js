@@ -5,8 +5,8 @@ import "./DemoUser.css";
 
 function DemoUser() {
   const dispatch = useDispatch();
-  const [credential, setCredential] = useState("Demo-lition");
-  const [password, setPassword] = useState("password");
+  const [credential] = useState("Demo-lition");
+  const [password] = useState("password");
 
 
 

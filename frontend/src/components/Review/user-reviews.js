@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { getUserReviewsThunk } from '../../store/reviews';
-import { useModal } from "../../context/Modal";
 
 function UserReviewsModal() {
 
-    const user = useSelector((state) => state.session.user);
+
     const dispatch = useDispatch();
-    const history = useHistory();
-    const { closeModal } = useModal();
-    const [errors, setErrors] = useState([]);
+
+    const [setErrors] = useState([]);
 
     const reviewData = useSelector(state => state.Reviews.user);
-    // console.log('herrow')
+    
     const reviewArr = Object.values(reviewData)
 
     useEffect(() => {
@@ -24,7 +21,7 @@ function UserReviewsModal() {
                     if (data && data.errors) setErrors(data.errors);
                 }
             );
-    }, [dispatch]);
+    }, [dispatch,setErrors]);
 
 
 
