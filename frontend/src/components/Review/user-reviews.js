@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getUserReviewsThunk } from '../../store/reviews';
@@ -24,7 +24,7 @@ function UserReviewsModal() {
                     if (data && data.errors) setErrors(data.errors);
                 }
             );
-    },[dispatch]);
+    }, [dispatch]);
 
 
 
@@ -36,9 +36,10 @@ function UserReviewsModal() {
             <div className='my-reviews-modal-div'>
                 {!!reviewArr.length ? reviewArr.map(review => (
                     <div className='my-reviews-card-div'>
-                        <li key={review.id}>{review.review}</li>
+                        <div key={review.id}>{review.review}</div>
+                        <div key={review.stars}>{review.stars}</div>
                     </div>
-                )):(
+                )) : (
                     <div>You have no reviews.</div>
                 )}
             </div>

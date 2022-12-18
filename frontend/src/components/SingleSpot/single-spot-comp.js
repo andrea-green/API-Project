@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMySpotThunk} from '../../store/spots';
-import { useParams, useHistory} from 'react-router-dom';
+import { getMySpotThunk } from '../../store/spots';
+import { useParams, useHistory } from 'react-router-dom';
 import SingleSpotDetails from '../../css-modules/singleSpot/singleSpot';
 import OpenModalButton from '../OpenModalButton';
 
@@ -9,10 +9,13 @@ import EditSpotForm from '../EditSpotForm/EditSpotForm';
 import DeleteSpotForm from '../DeleteSpotForm/delete-spot-form';
 
 
-
 function SingleSpot() {
     const user = useSelector((state) => state.session.user);
     const mySpot = useSelector((state) => state.Spots.singleSpot);
+
+    const spotReviews = useSelector((state) => state.Reviews.spot);
+    const spotReviewsArr = Object.values(spotReviews);
+    
 
     const dispatch = useDispatch();
     const { spotId } = useParams();
@@ -21,7 +24,7 @@ function SingleSpot() {
 
     useEffect(() => {
         dispatch(getMySpotThunk(spotId))
-        .catch(()=> history.push('/PageNotFound'))
+            .catch(() => history.push('/PageNotFound'))
     }, [dispatch, spotId]);
 
 
@@ -55,26 +58,27 @@ function SingleSpot() {
                             {`${mySpot.numReviews} Reviews`}
                         </div>
                     </div>
+                    <div className='create-review'>
+                    </div>
+                    {user && user?.id === mySpot?.Owner?.id ? (
+                        <div>
+                            <div>{<OpenModalButton
+                                modalComponent={<EditSpotForm />}
+                                buttonText='Edit Spot' />}</div>
+                            <div>{<OpenModalButton
+                                modalComponent={<DeleteSpotForm />}
+                                buttonText='Delete Spot ' />}</div>
+                        </div>
+                    ) : (
+                        <div className='fees-div'>
+                            <div>{`cleaning fee = $${25}`}</div>
+                            <div>{`Service fee = $${100}`}</div>
+                        </div>
+                    )}
                 </div>
-
-                {user && user?.id === mySpot?.Owner?.id ? (
-                    <div>
-                        <div>{<OpenModalButton
-                            modalComponent={<EditSpotForm />}
-                            buttonText='Edit Spot' />}</div>
-                        <div>{<OpenModalButton
-                            modalComponent={<DeleteSpotForm />}
-                            buttonText='Delete Spot ' />}</div>
-                    </div>
-                ) : (
-                    <div className='fees-div'>
-                        <div>{`cleaning fee = $${25}`}</div>
-                        <div>{`Service fee = $${100}`}</div>
-                    </div>
-                )}
             </div>
-        </div>
 
+        </div>
     );
 }
 

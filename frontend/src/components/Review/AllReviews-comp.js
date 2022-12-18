@@ -2,7 +2,6 @@ import './allreviews.css';
 import React, { useEffect,useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory,useParams } from 'react-router-dom';
-import Review from './create-review';
 import { getSpotReviewsThunk } from '../../store/reviews';
 
 
@@ -23,7 +22,7 @@ function AllReviews() {
         <div>
             <div>
                 <h1>herrow</h1>
-                <Review/>
+
             </div>
         </div>
     );

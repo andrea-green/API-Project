@@ -1,23 +1,14 @@
-import './review.css';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory} from 'react-router-dom';
+import React, { useState } from 'react';
+import { useDispatch} from 'react-redux';
+import { useModal } from "../../context/Modal";
+import * as sessionActions from "../../store/session";
+// import './CreateSpotForm.css';
+import { createReviewThunk } from '../../store/spots';
+import { useHistory } from 'react-router-dom';
 
-
-function Review() {
-    const user = useSelector((state) => state.session.user);
-    const mySpot = useSelector((state) => state.Spots.singleSpot);
-
-    const dispatch = useDispatch();
-    const { spotId } = useParams();
-    const history = useHistory();
-    const [validationErrors, setValidationErrors] = useState([]);
-
-    
-
-    return <div>
-        <h1>herro</h1>
-    </div>;
+const CreateReviewForm = () => {
+    return null;
 }
 
-export default Review;
+
+export default CreateReviewForm; 

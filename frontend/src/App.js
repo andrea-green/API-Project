@@ -5,8 +5,9 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllSpots from "./components/AllSpots/allSpots";
 import SingleSpot from "./components/SingleSpot/single-spot-comp";
-import AllReviews from "./components/Review/AllReviews-comp.js";
-import UserReviewsModal from "./components/Review/user-reviews";
+import ReviewsComponent from "./components/Review/review-index";
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function App() {
           </Route>
           <Route path='/spots/:spotId'>
             <SingleSpot />
-            <AllReviews />
+            <ReviewsComponent />
           </Route>
           <Route path='/'>
             <div className='404Error'>

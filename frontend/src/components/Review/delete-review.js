@@ -3,23 +3,16 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useModal } from "../../context/Modal";
-import { deleteSpotThunk } from '../../store/spots';
+import { deleteReviewThunk } from '../../store/reviews';
 
 
 
-const DeleteSpotForm = () => {
+const DeleteReviewForm = ({myReview}) => {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
     const history = useHistory();
-
-
-
-    const mySpot = useSelector((state) => state.Spots.singleSpot);
-
     const [boolean, setBoolean] = useState(false);
-
     const [errorValidations, setErrorValidations] = useState([]);
-
     const trueBoolean = (e) => setBoolean(true);
     const falseBoolean = (e) => setBoolean(false);
 
@@ -27,8 +20,7 @@ const DeleteSpotForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await dispatch(deleteSpotThunk(mySpot.id))
-            .then(history.push(`/`))
+        await dispatch(deleteReviewThunk(myReview.id))
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();
@@ -39,8 +31,8 @@ const DeleteSpotForm = () => {
     return (
         <div>
             <h1>Are you sure you want to delete?</h1>
-            <section className='delete-spot-form'>
-                    <div className='delete-errors'>
+            <section className='delete-review-form'>
+                    <div className='delete-review-errors'>
                         <ul>{errorValidations.map((error) => (
                             <li key={error}>{error}</li>
                         ))}
@@ -78,4 +70,4 @@ const DeleteSpotForm = () => {
     )
 }
 
-export default DeleteSpotForm;
+export default DeleteReviewForm;
