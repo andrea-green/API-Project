@@ -1,15 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import DemoUser from "../DemoUser";
+import CreateSpotForm from "../CreateSpotFormModal/CreateSpotForm";
+import UserReviewsModal from "../Review/user-reviews";
+import { getUserReviewsThunk } from "../../store/reviews.js"
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const currentUser = useSelector((state)=>state.session.user);
+
 
   const openMenu = () => {
     if (showMenu) return;
@@ -38,6 +43,12 @@ function ProfileButton({ user }) {
     const closeMenu = () => setShowMenu(false);
   };
 
+  const userReviews = (e) => {
+    e.preventDefault();
+    dispatch(getUserReviewsThunk())
+    closeMenu();
+  }
+
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
@@ -48,9 +59,24 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
-            <li>{user.email}</li>
+            <div className='user-info-div'>
+              <li>{user.username}</li>
+              <li>{user.firstName} {user.lastName}</li>
+              <li>{user.email}</li>
+            </div>
+            <div>
+
+              <OpenModalMenuItem
+                itemText="List Your Property"
+                onItemClick={closeMenu}
+                modalComponent={<CreateSpotForm />}
+                />
+                </div>
+            <OpenModalMenuItem
+              itemText="My Reviews"
+              onItemClick={closeMenu}
+              modalComponent={<UserReviewsModal />}
+            />
             <li>
               <button onClick={logout}>Log Out</button>
             </li>
@@ -67,11 +93,7 @@ function ProfileButton({ user }) {
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
-            <OpenModalMenuItem
-            itemText="Demo User"
-            onItemClick={closeMenu}
-            modalComponent={<DemoUser />}
-            />
+            <DemoUser/>
           </>
         )}
       </ul>

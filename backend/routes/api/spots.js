@@ -184,7 +184,7 @@ router.get('/', async(req,res)=>{
 
 
         if(!AvgRating){
-            spot.avgRating= "no reviews"
+            spot.avgRating= "New"
         }else {
             spot.avgRating = AvgRating;
         };
@@ -309,7 +309,7 @@ router.get('/current', requireAuth, async (req,res) => {
 })
 
 // Get details for spot from an id
-router.get('/:spotId', requireAuth,async(req,res)=>{
+router.get('/:spotId',async(req,res)=>{
 
     const mySpot = await Spot.findByPk (req.params.spotId,{
         include:[{
