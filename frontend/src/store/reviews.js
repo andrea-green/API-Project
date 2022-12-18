@@ -107,14 +107,14 @@ export default function reviewReducer(state = initialState, action) {
 
         //create new review
         case CREATE_REVIEW: {
-            const newState = { ...state, user:{} };
+            const newState = { spot:{...state}, user:{} };
             newState.spot[action.review.id] = action.review;
             return newState;
         };
 
          //delete review
          case DELETE_REVIEW: {
-            const newState = { ...state, user: {} };
+            const newState = { spot:{...state.spot}, user: {} };
             delete newState.spot[action.reviewId];
             return newState;
         };

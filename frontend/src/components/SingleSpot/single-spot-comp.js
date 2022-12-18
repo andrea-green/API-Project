@@ -15,7 +15,7 @@ function SingleSpot() {
 
     const spotReviews = useSelector((state) => state.Reviews.spot);
     const spotReviewsArr = Object.values(spotReviews);
-    
+
 
     const dispatch = useDispatch();
     const { spotId } = useParams();
@@ -25,7 +25,7 @@ function SingleSpot() {
     useEffect(() => {
         dispatch(getMySpotThunk(spotId))
             .catch(() => history.push('/PageNotFound'))
-    }, [dispatch, spotId]);
+    }, [dispatch, spotId,spotReviews]);
 
 
     if (!mySpot?.id) return null;

@@ -21,7 +21,7 @@ function AllReviews() {
     return (
         <div>
             <div>
-                <h1>herrow</h1>
+                <h1>herrow reviews here</h1>
 
             </div>
         </div>

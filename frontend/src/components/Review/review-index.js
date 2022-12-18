@@ -17,27 +17,35 @@ function ReviewsComponent () {
     const history = useHistory();
     //checking if user = owner.
     const user = useSelector((state) => state.session.user);
-    const owner = useSelector((state) => state.Spots.singleSpot.ownerId);
+    const owner = useSelector((state) => state.Spots.singleSpot?.ownerId);
     const ownerCheck = owner === user?.id;
 
     //checking if user already has a review on the spot.
     const spotReviews = useSelector((state) => state.Reviews.spot);
     const spotReviewsArr = Object.values(spotReviews);
     const reviewCheck = spotReviewsArr.find((review) => user.id === review.userId);
-    
+
     const conditionals = () =>{
         if(user){
             if(ownerCheck) {
-                return <div>No buttons</div>
+                return <div></div>
             } else if (!ownerCheck) {
                 if(reviewCheck) {
-                    return <DeleteReviewForm myReview={reviewCheck}/>
+                    return (
+                        <div className='button'>{<OpenModalButton
+                            modalComponent={<DeleteReviewForm myReview={reviewCheck}/>}
+                            buttonText='Delete Review' />}</div>
+                        )
                 }else if (!reviewCheck) {
-                    return <div>'create button'</div>
+                    return (
+                        <div className='button'>{<OpenModalButton
+                            modalComponent={<CreateReviewForm myReview={reviewCheck}/>}
+                            buttonText='Leave a review' />}</div>
+                        )
                 }
             }
 
-        }else if (!user)return <div>No buttons</div>
+        }else if (!user)return <div>You must be logged in to leave a review.</div>
     };
 
     return (
