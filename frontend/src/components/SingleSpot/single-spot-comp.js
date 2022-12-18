@@ -20,7 +20,7 @@ function SingleSpot() {
     const dispatch = useDispatch();
     const { spotId } = useParams();
     const history = useHistory();
-    const [validationErrors, setValidationErrors] = useState([]);
+    const [validationErrors] = useState([]);
 
     useEffect(() => {
         dispatch(getMySpotThunk(spotId))

@@ -24,6 +24,10 @@ function AllSpots() {
         dispatch(getSpotsThunk())
     }, [dispatch]);
 
+    // const checkRatings = (rating) =>{
+    //     if(rating)
+    // }
+
 
     return (
         //redo this part like sohini showed me to

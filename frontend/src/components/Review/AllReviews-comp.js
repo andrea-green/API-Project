@@ -24,9 +24,10 @@ function AllReviews() {
             <div className='all-reviews-outer-div'>
                 <h1>Reviews</h1>
                 <div>
-                    {spotReviewsArr.map(({id,review,stars})=>(
+                    {spotReviewsArr.map(({id,review,stars,User})=>(
                         <div key={id} className='individual-review-div'>
                             <div>
+                                <div>{User.firstName} {User.lastName}</div>
                                 <div className='user-review-div'>{review}</div>
                                 <div className='user-star-rating-div'>{stars}</div>
                             </div>

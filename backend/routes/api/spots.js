@@ -184,7 +184,7 @@ router.get('/', async(req,res)=>{
 
 
         if(!AvgRating){
-            spot.avgRating= "no reviews"
+            spot.avgRating= "New"
         }else {
             spot.avgRating = AvgRating;
         };

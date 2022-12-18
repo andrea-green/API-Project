@@ -10,7 +10,7 @@ import DeleteReviewForm from './delete-review';
 
 
 
-function ReviewsComponent () {
+function ReviewsComponent() {
 
     const { spotId } = useParams();
     const dispatch = useDispatch();
@@ -23,29 +23,29 @@ function ReviewsComponent () {
     //checking if user already has a review on the spot.
     const spotReviews = useSelector((state) => state.Reviews.spot);
     const spotReviewsArr = Object.values(spotReviews);
-    const reviewCheck = spotReviewsArr.find((review) => user.id === review.userId);
+    const reviewCheck = spotReviewsArr.find((review) => user?.id === review?.userId);
 
-    const conditionals = () =>{
-        if(user){
-            if(ownerCheck) {
+    const conditionals = () => {
+        if (user) {
+            if (ownerCheck) {
                 return <div></div>
             } else if (!ownerCheck) {
-                if(reviewCheck) {
+                if (reviewCheck) {
                     return (
                         <div className='button'>{<OpenModalButton
-                            modalComponent={<DeleteReviewForm myReview={reviewCheck}/>}
+                            modalComponent={<DeleteReviewForm myReview={reviewCheck} />}
                             buttonText='Delete Review' />}</div>
-                        )
-                }else if (!reviewCheck) {
+                    )
+                } else if (!reviewCheck) {
                     return (
                         <div className='button'>{<OpenModalButton
-                            modalComponent={<CreateReviewForm myReview={reviewCheck}/>}
+                            modalComponent={<CreateReviewForm myReview={reviewCheck} />}
                             buttonText='Leave a review' />}</div>
-                        )
+                    )
                 }
             }
 
-        }else if (!user)return <div>You must be logged in to leave a review.</div>
+        } else if (!user) return <div>You must be logged in to leave a review.</div>
     };
 
     return (

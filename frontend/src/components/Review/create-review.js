@@ -35,6 +35,7 @@ const CreateReviewForm = () => {
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();
+                console.log('data',data)
                 if (data && data.errors) setErrors(data.errors);
             });
     }
@@ -65,15 +66,15 @@ const CreateReviewForm = () => {
                         </label>
                         <label>
                             stars
-                            <input
-                                type="number"
-                                placeholder="stars"
-                                required
-                                value={stars}
-                                min='1'
-                                max='5'
-                                onChange={updateStars}
-                            />
+                            <select>
+                                <option value=''>Select</option>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                                <option value='4'>4</option>
+                                <option value='5'>5</option>
+                            </select>
+
                         </label>
                         <button type='submit'>Leave a Review</button>
                     </form>
