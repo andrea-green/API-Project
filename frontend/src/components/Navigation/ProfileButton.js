@@ -7,13 +7,13 @@ import SignupFormModal from '../SignupFormModal';
 import DemoUser from "../DemoUser";
 import CreateSpotForm from "../CreateSpotFormModal/CreateSpotForm";
 import UserReviewsModal from "../Review/user-reviews";
-import { getUserReviewsThunk } from "../../store/reviews.js"
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
-  const currentUser = useSelector((state)=>state.session.user);
+
+  useSelector((state)=>state.session.user);
 
 
   const openMenu = () => {
@@ -40,14 +40,8 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
-    const closeMenu = () => setShowMenu(false);
   };
 
-  const userReviews = (e) => {
-    e.preventDefault();
-    dispatch(getUserReviewsThunk())
-    closeMenu();
-  }
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 

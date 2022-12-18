@@ -75,7 +75,7 @@ export const createNewSpotThunk = (newSpot, url) => async (dispatch) => {
     });
     if (spotResponse.ok) {
         const spotData = await spotResponse.json();
-        // console.log('spotData', spotData)
+      
         const spotImageResponse = await csrfFetch(`/api/spots/${spotData.id}/images`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

@@ -8,35 +8,23 @@ import { useHistory } from 'react-router-dom';
 function AllSpots() {
     const dispatch = useDispatch();
     const history = useHistory();
-
-    // const allSpots = useSelector((state) => console.log('state.Spot',state.Spots));
-    // console.log(allSpots);
     const allSpots = useSelector((state) => state.Spots.allSpots);
-    // console.log('state',state)
-
-    // console.log('allSpots',allSpots);
     const allSpotsArr = Object.values(allSpots);
-    //console.log('allSpotsArr',allSpotsArr);
+
 
     useEffect(() => {
-        // console.log('action working')
-        //pass in thunk action creator
         dispatch(getSpotsThunk())
     }, [dispatch]);
 
-    // const checkRatings = (rating) =>{
-    //     if(rating)
-    // }
 
 
     return (
-        //redo this part like sohini showed me to
         <section className='big-box-div'>
             <div className="all-spots-page">
                 {allSpotsArr.map(({ id, city, state, avgRating, price, previewImage }) => (
                     <div key={id} className='all-spots-details' onClick={() => history.push(`/spots/${id}`)}>
                         <div className='spot-preview-image-div'>
-                            <img src={previewImage}></img>
+                            <img src={previewImage} alt='preview-img'></img>
                         </div>
                         <div className='city-state-div'> {`${city},${state}`}</div>
                         <div className='price-div'>{`${price} night`}</div>

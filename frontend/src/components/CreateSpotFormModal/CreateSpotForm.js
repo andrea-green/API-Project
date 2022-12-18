@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch} from 'react-redux';
 import { useModal } from "../../context/Modal";
-import * as sessionActions from "../../store/session";
 import './CreateSpotForm.css';
 import { createNewSpotThunk } from '../../store/spots';
 import { useHistory } from 'react-router-dom';
@@ -19,7 +18,7 @@ const CreateSpotForm = () => {
     const [description,setDescription] = useState('');
     const [price,setPrice] = useState(1);
     const [url,setUrl] = useState('');
-    const [errors,setErrors] = useState([]);
+    const [setErrors] = useState([]);
     const { closeModal } = useModal();
 
     const updateAddress = (e) => setAddress(e.target.value);

@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { useModal } from "../../context/Modal";
-import * as sessionActions from "../../store/session";
-// import './CreateSpotForm.css';
 import { createNewReviewThunk } from '../../store/reviews';
-import { useHistory } from 'react-router-dom';
+
 
 const CreateReviewForm = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
 
 
     const [review, setReview] = useState('');
     const [stars, setStars] = useState('');
-    const [errors, setErrors] = useState([]);
-    const [validationErrors, setValidationErrors] = useState([]);
+    const [ setErrors] = useState([]);
+    const [validationErrors,] = useState([]);
     const { closeModal } = useModal();
 
     const mySpotId = useSelector((state)=>state.Spots.singleSpot.id);
@@ -35,7 +32,6 @@ const CreateReviewForm = () => {
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();
-                console.log('data',data)
                 if (data && data.errors) setErrors(data.errors);
             });
     }
@@ -66,7 +62,7 @@ const CreateReviewForm = () => {
                         </label>
                         <label>
                             stars
-                            <select>
+                            <select value={stars} onChange={updateStars}>
                                 <option value=''>Select</option>
                                 <option value='1'>1</option>
                                 <option value='2'>2</option>
