@@ -5,10 +5,17 @@
     flex-direction: column;
 } */
 
+.big-box-div {
+    display:flex-box;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .all-spots-page {
     display:flex-box;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     height: 323px;
     width: 307px;
     margin: 10px 10px
@@ -20,8 +27,8 @@
 
 .city-state-div {
     display:flex;
-    justify-self:end;
-    align-items:center;
+    justify-content: right;
+    align-items:normal;
 
 }
 

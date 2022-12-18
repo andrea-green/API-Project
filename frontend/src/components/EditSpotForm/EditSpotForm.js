@@ -156,7 +156,8 @@ const EditSpotForm = () => {
                         price
                         <input
                             type="number"
-
+                            min='1'
+                            max='1000'
                             required
                             value={price}
                             onChange={updatePrice}

@@ -50,7 +50,7 @@ export const getUserReviewsThunk = () => async (dispatch) => {
     return response;
 };
 
-export const createNewReviewThunk = (newReview,spotId) => async (dispatch) => {
+export const createNewReviewThunk = (newReview,spotId,reviewAddDetails) => async (dispatch) => {
     const reviewResponse = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -58,7 +58,8 @@ export const createNewReviewThunk = (newReview,spotId) => async (dispatch) => {
     });
     if (reviewResponse.ok) {
         const reviewData = await reviewResponse.json();
-        dispatch(createReviewAc(reviewData));
+        const finalReview={...reviewData,...reviewAddDetails};
+        dispatch(createReviewAc(finalReview));
         return reviewData;
     }
     return reviewResponse;
@@ -107,7 +108,7 @@ export default function reviewReducer(state = initialState, action) {
 
         //create new review
         case CREATE_REVIEW: {
-            const newState = { spot:{...state}, user:{} };
+            const newState = { spot:{...state.spot}, user:{} };
             newState.spot[action.review.id] = action.review;
             return newState;
         };

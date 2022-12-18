@@ -12,6 +12,7 @@ function AllReviews() {
     const { spotId } = useParams();
     const spotReviews = useSelector((state)=>state.Reviews.spot);
     const spotReviewsArr=Object.values(spotReviews);
+    
 
 
     useEffect(() => {
