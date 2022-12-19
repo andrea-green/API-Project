@@ -16,7 +16,7 @@ const CreateReviewForm = () => {
     const history = useHistory();
 
     const mySpotId = useSelector((state) => state.Spots.singleSpot.id);
-   const currentUser = useSelector((state)=>state.session.user);
+    const currentUser = useSelector((state) => state.session.user);
 
 
     const updateReview = (e) => setReview(e.target.value);
@@ -32,11 +32,11 @@ const CreateReviewForm = () => {
         };
 
         const reviewAddDetails = {
-            User:currentUser,
-            ReviewImages:[],
+            User: currentUser,
+            ReviewImages: [],
         }
 
-        return dispatch(createNewReviewThunk(newReview, mySpotId,reviewAddDetails))
+        return dispatch(createNewReviewThunk(newReview, mySpotId, reviewAddDetails))
             //.then(()=> history.push(`/spots/${mySpotId}`))
             .then(closeModal)
             .catch(async (res) => {
@@ -56,12 +56,13 @@ const CreateReviewForm = () => {
                         ))}
                     </ul>
                 </div>
-                <h1>Leave a review</h1>
-                <section className='create-review-form'>
-                    <form onSubmit={handleSubmit}>
-                        <label>
-                            Write a review here
-                            <input
+                <div className='form-header'>
+                    <h1>Leave a review</h1>
+                </div>
+                <section className='form-body-container'>
+                    <form  className='form-body' onSubmit={handleSubmit}>
+                        <label className='form-label'>
+                            <input className='form-input'
                                 type="text"
                                 placeholder="Leave review here"
                                 required
@@ -81,7 +82,9 @@ const CreateReviewForm = () => {
                             </select>
 
                         </label>
-                        <button type='submit'>Leave a Review</button>
+
+                        <button className='button form-button' type='submit'>Leave a Review</button>
+
                     </form>
                 </section>
             </div>

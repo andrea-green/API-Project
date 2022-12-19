@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import OpenModalButton from '../OpenModalButton';
 import CreateReviewForm from '../Review/create-review';
 import DeleteReviewForm from './delete-review';
+import '../../index.css';
 
 
 
@@ -27,15 +28,22 @@ function ReviewsComponent() {
             } else if (!ownerCheck) {
                 if (reviewCheck) {
                     return (
-                        <div className='button'>{<OpenModalButton
-                            modalComponent={<DeleteReviewForm myReview={reviewCheck} />}
-                            buttonText='Delete Review' />}</div>
+
+                            <OpenModalButton className='button new-button'
+                                modalComponent={<DeleteReviewForm myReview={reviewCheck} />}
+                                buttonText='Delete Review'
+                            />
+
                     )
                 } else if (!reviewCheck) {
                     return (
-                        <div className='button'>{<OpenModalButton
-                            modalComponent={<CreateReviewForm myReview={reviewCheck} />}
-                            buttonText='Leave a review' />}</div>
+
+
+                            <OpenModalButton className='button new-button'
+                                modalComponent={<CreateReviewForm myReview={reviewCheck} />}
+                                buttonText='Leave a review'
+                            />
+
                     )
                 }
             }

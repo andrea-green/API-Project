@@ -8,14 +8,14 @@ function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
   return (
-    <ul>
+    <ul className='logo-and-profile-button-div'>
       <li>
         <NavLink exact to="/">
           <img className='logo' src={require('../../snowBee-logo.png')} alt='snow-bee-logo'></img>
         </NavLink>
       </li>
       {isLoaded && (
-        <li>
+        <li className='profile-button'>
           <ProfileButton user={sessionUser} />
         </li>
       )}

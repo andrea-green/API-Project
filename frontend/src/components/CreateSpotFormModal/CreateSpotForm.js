@@ -56,16 +56,18 @@ const CreateSpotForm = () => {
 
     return (
         <>
-            <h1>List your home</h1>
-            <section className='create-spot-form'>
+            <div className='form-header'>
+                <h1>List your home</h1>
+            </div >
+            <section className='form-body-container'>
                 <ul> {errors.map((error) => (
                     <li key={error}>{error}</li>
                 ))}
                 </ul>
-                <form onSubmit={handleSubmit}>
-                    <label>
-                        name
-                        <input
+                <form className='form-body' onSubmit={handleSubmit}>
+                    <label className='form-label'>
+
+                        <input className='form-input'
                             type="text"
                             placeholder="Property Name"
                             required
@@ -73,9 +75,9 @@ const CreateSpotForm = () => {
                             onChange={updateName}
                         />
                     </label>
-                    <label>
-                        address
-                        <input
+                    <label className='form-label'>
+
+                        <input className='form-input'
                             type="text"
                             placeholder="Address"
                             required
@@ -83,9 +85,9 @@ const CreateSpotForm = () => {
                             onChange={updateAddress}
                         />
                     </label>
-                    <label>
-                        city
-                        <input
+                    <label className='form-label'>
+
+                        <input className='form-input'
                             type="text"
                             placeholder="City"
                             required
@@ -93,9 +95,9 @@ const CreateSpotForm = () => {
                             onChange={updateCity}
                         />
                     </label>
-                    <label>
-                        state
-                        <input
+                    <label className='form-label'>
+
+                        <input className='form-input'
                             type="text"
                             placeholder="State"
                             required
@@ -103,9 +105,9 @@ const CreateSpotForm = () => {
                             onChange={updateState}
                         />
                     </label>
-                    <label>
-                        Country
-                        <input
+                    <label className='form-label'>
+
+                        <input className='form-input'
                             type="text"
                             placeholder="Country"
                             required
@@ -113,9 +115,9 @@ const CreateSpotForm = () => {
                             onChange={updateCountry}
                         />
                     </label>
-                    <label>
-                        Description
-                        <input
+                    <label className='form-label'>
+
+                        <input className='form-input'
                             type="text"
                             placeholder="Description"
                             required
@@ -123,9 +125,9 @@ const CreateSpotForm = () => {
                             onChange={updateDescription}
                         />
                     </label>
-                    <label>
-                        price
-                        <input
+                    <label className='form-label'>
+
+                        <input className='form-input'
                             type="number"
                             placeholder="Price per night "
                             required
@@ -135,9 +137,9 @@ const CreateSpotForm = () => {
                             onChange={updatePrice}
                         />
                     </label>
-                    <label>
-                        preview image link
-                        <input
+                    <label className='form-label'>
+
+                        <input className='form-input'
                             type="url"
                             placeholder="preview image link"
                             required
@@ -145,7 +147,9 @@ const CreateSpotForm = () => {
                             onChange={updateUrl}
                         />
                     </label>
-                    <button type="submit">Create new Spot</button>
+                    <button
+                    className='button form-button'
+                    type="submit">Create new Spot</button>
                 </form>
             </section>
 

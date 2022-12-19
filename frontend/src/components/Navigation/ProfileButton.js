@@ -46,33 +46,37 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
-    <>
-      <button onClick={openMenu}>
+    <div className='dropdown-menu-div'>
+      <button className='button' onClick={openMenu}>
         <i class="fa-solid fa-user"></i>
       </button>
+
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
             <div className='user-info-div'>
-              <li>{user.username}</li>
-              <li>{user.firstName} {user.lastName}</li>
-              <li>{user.email}</li>
+              <li className='form-input'>{user.username}</li>
+              <li className='form-input'>{user.firstName} {user.lastName}</li>
+              <li className='form-input'>{user.email}</li>
             </div>
-            <div>
+            <div className='button form-input'>
 
               <OpenModalMenuItem
+
                 itemText="List Your Property"
                 onItemClick={closeMenu}
                 modalComponent={<CreateSpotForm />}
               />
             </div>
-            <OpenModalMenuItem
-              itemText="My Reviews"
-              onItemClick={closeMenu}
-              modalComponent={<UserReviewsModal />}
-            />
+            <div className="button form-input">
+              <OpenModalMenuItem
+                itemText="My Reviews"
+                onItemClick={closeMenu}
+                modalComponent={<UserReviewsModal />}
+              />
+            </div>
             <li>
-              <button onClick={logout}>Log Out</button>
+              <button className='button form-button' onClick={logout}>Log Out</button>
             </li>
           </>
         ) : (
@@ -81,6 +85,7 @@ function ProfileButton({ user }) {
               itemText="Log In"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
+              className='modal'
             />
             <OpenModalMenuItem
               itemText="Sign Up"
@@ -91,7 +96,7 @@ function ProfileButton({ user }) {
           </>
         )}
       </ul>
-    </>
+    </div>
   );
 }
 
