@@ -13,7 +13,7 @@ function ProfileButton({ user }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
-  useSelector((state)=>state.session.user);
+  useSelector((state) => state.session.user);
 
 
   const openMenu = () => {
@@ -48,7 +48,7 @@ function ProfileButton({ user }) {
   return (
     <>
       <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+        <i class="fa-solid fa-user"></i>
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
@@ -64,8 +64,8 @@ function ProfileButton({ user }) {
                 itemText="List Your Property"
                 onItemClick={closeMenu}
                 modalComponent={<CreateSpotForm />}
-                />
-                </div>
+              />
+            </div>
             <OpenModalMenuItem
               itemText="My Reviews"
               onItemClick={closeMenu}
@@ -87,7 +87,7 @@ function ProfileButton({ user }) {
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
-            <DemoUser/>
+            <DemoUser />
           </>
         )}
       </ul>

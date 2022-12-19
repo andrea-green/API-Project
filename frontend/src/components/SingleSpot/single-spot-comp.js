@@ -7,6 +7,7 @@ import OpenModalButton from '../OpenModalButton';
 
 import EditSpotForm from '../EditSpotForm/EditSpotForm';
 import DeleteSpotForm from '../DeleteSpotForm/delete-spot-form';
+import Footer from '../../css-modules/singleSpot/footer/footer';
 
 
 function SingleSpot() {
@@ -50,9 +51,7 @@ function SingleSpot() {
 
                         </h1>
                     </div>
-                    <div className='average-spot-rating'>
-                        <div>{mySpot.avgRating}</div>
-                    </div>
+                    <i class="fa-solid fa-star">{mySpot.avgRating}</i>
                     <div className='number-of-reviews'>
                         <div>
                             {`${mySpot.numReviews} Reviews`}
@@ -71,14 +70,15 @@ function SingleSpot() {
                         </div>
                     ) : (
                         <div className='fees-div'>
-                            <div>{`cleaning fee = $${25}`}</div>
+                            <div>{`Cleaning fee = $${25}`}</div>
                             <div>{`Service fee = $${100}`}</div>
                         </div>
                     )}
                 </div>
             </div>
-
+            <div><Footer/></div>
         </div>
+
     );
 }
 

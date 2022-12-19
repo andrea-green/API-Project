@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useModal } from "../../context/Modal";
 import './CreateSpotForm.css';
 import { createNewSpotThunk } from '../../store/spots';
@@ -10,15 +10,15 @@ const CreateSpotForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [name,setName] = useState('');
-    const [address,setAddress] = useState('');
+    const [name, setName] = useState('');
+    const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
-    const [state,setState] = useState('');
-    const [country,setCountry] = useState('');
-    const [description,setDescription] = useState('');
-    const [price,setPrice] = useState(1);
-    const [url,setUrl] = useState('');
-    const [setErrors] = useState([]);
+    const [state, setState] = useState('');
+    const [country, setCountry] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState(1);
+    const [url, setUrl] = useState('');
+    const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
 
     const updateAddress = (e) => setAddress(e.target.value);
@@ -31,7 +31,7 @@ const CreateSpotForm = () => {
     const updateUrl = (e) => setUrl(e.target.value);
 
     //submit click
-    const handleSubmit = async(e)=>{
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
         const myNewSpot = {
@@ -40,17 +40,17 @@ const CreateSpotForm = () => {
             city,
             state,
             country,
-            lat:90.0000,
-            lng:135.0000,
+            lat: 90.0000,
+            lng: 135.0000,
             description,
             price,
         };
-        return dispatch(createNewSpotThunk(myNewSpot,url))
+        return dispatch(createNewSpotThunk(myNewSpot, url))
             .then((res) => history.push(`/spots/${res.id}`))
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();
-                if(data && data.errors) setErrors(data.errors);
+                if (data && data.errors) setErrors([data.errors]);
             });
     };
 
@@ -58,6 +58,10 @@ const CreateSpotForm = () => {
         <>
             <h1>List your home</h1>
             <section className='create-spot-form'>
+                <ul> {errors.map((error) => (
+                    <li key={error}>{error}</li>
+                ))}
+                </ul>
                 <form onSubmit={handleSubmit}>
                     <label>
                         name
@@ -110,7 +114,7 @@ const CreateSpotForm = () => {
                         />
                     </label>
                     <label>
-                       Description
+                        Description
                         <input
                             type="text"
                             placeholder="Description"
@@ -125,6 +129,8 @@ const CreateSpotForm = () => {
                             type="number"
                             placeholder="Price per night "
                             required
+                            min='1'
+                            max='1000'
                             value={price}
                             onChange={updatePrice}
                         />
@@ -132,7 +138,7 @@ const CreateSpotForm = () => {
                     <label>
                         preview image link
                         <input
-                            type="text"
+                            type="url"
                             placeholder="preview image link"
                             required
                             value={url}

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from "../../context/Modal";
 import { createNewReviewThunk } from '../../store/reviews';
+import { useHistory } from 'react-router-dom';
 
 
 const CreateReviewForm = () => {
@@ -10,11 +11,13 @@ const CreateReviewForm = () => {
 
     const [review, setReview] = useState('');
     const [stars, setStars] = useState('');
-    const [ setErrors] = useState([]);
-    const [validationErrors,] = useState([]);
+    const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
+    const history = useHistory();
 
-    const mySpotId = useSelector((state)=>state.Spots.singleSpot.id);
+    const mySpotId = useSelector((state) => state.Spots.singleSpot.id);
+   const currentUser = useSelector((state)=>state.session.user);
+
 
     const updateReview = (e) => setReview(e.target.value);
     const updateStars = (e) => setStars(e.target.value);
@@ -28,11 +31,17 @@ const CreateReviewForm = () => {
             stars,
         };
 
-        return dispatch(createNewReviewThunk(newReview,mySpotId))
+        const reviewAddDetails = {
+            User:currentUser,
+            ReviewImages:[],
+        }
+
+        return dispatch(createNewReviewThunk(newReview, mySpotId,reviewAddDetails))
+            //.then(()=> history.push(`/spots/${mySpotId}`))
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
+                if (data && data.errors) setErrors(Object.values(data.errors));
             });
     }
 
@@ -42,7 +51,7 @@ const CreateReviewForm = () => {
             <div className='leave-review-div'>
                 <div>
                     <ul className='errors-list'>
-                        {validationErrors.map((error) => (
+                        {errors.map((error) => (
                             <li key={error}>{error} </li>
                         ))}
                     </ul>
