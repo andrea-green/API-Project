@@ -14,7 +14,8 @@ function SingleSpot() {
     const user = useSelector((state) => state.session.user);
     const mySpot = useSelector((state) => state.Spots.singleSpot);
     const owner = useSelector((state) => state.Spots.singleSpot.Owner?.firstName)
-    const spotPic = mySpot.SpotImages.find(imgObj => imgObj.preview === true)
+    const spotPics = mySpot.SpotImages
+    const mySpotPic = spotPics?.find(imgObj => imgObj.preview === true)
 
 
 
@@ -47,7 +48,7 @@ function SingleSpot() {
                     <SingleSpotDetails />
                 </div>
                 <div className='spot-preview-image-div'>
-                    <img className='preview-image-div' src={spotPic?.url} alt='spot-pic-url'></img>
+                    <img className='preview-image-div' src={mySpotPic?.url} alt='spot-pic-url'></img>
                 </div>
                 <div className='spot-modal-and-details'>
                     <div className='property-information'>

@@ -45,7 +45,7 @@ const EditSpotForm = () => {
         if (description.length === 0) errors.push("You must enter a valid description.");
         if (price <= 0) errors.push("You must enter a valid price.");
 
-     setErrorValidations(errors);
+        setErrorValidations(errors);
     }, [name, address, city, state, country, description, price]);
 
 
@@ -63,7 +63,7 @@ const EditSpotForm = () => {
             lat: 90.0000,
             lng: 135.0000,
         }
-        const {id, Owner,SpotImages,numReviews,avgStarRating} = mySpot
+        const { id, Owner, SpotImages, numReviews, avgStarRating } = mySpot
 
         const spotAddDetails = {
             id,
@@ -73,7 +73,7 @@ const EditSpotForm = () => {
             SpotImages
         }
 
-        await dispatch(updateSpotThunk(modifiedSpot,spotAddDetails))
+        await dispatch(updateSpotThunk(modifiedSpot, spotAddDetails))
             .then(history.push(`/spots/${id}`))
             .then(closeModal)
             .catch(async (res) => {
@@ -84,78 +84,82 @@ const EditSpotForm = () => {
 
     return (
         <>
-            <h1>Edit your listing</h1>
-            <section className='edit-spot-form'>
+            <div className='form-header'>
+                <h1>Edit your listing</h1>
+            </div>
+            <section className='form-body-container'>
                 <div className='owner-edit-form'>
                     <ul> {errorValidations.map((error) => (
                         <li key={error}>{error}</li>
                     ))}
                     </ul>
                 </div>
-                <form onSubmit={handleSubmit}>
-                    <label>
-                        name
-                        <input
+                <form className='form-body' onSubmit={handleSubmit}>
+                    <label className='form-label'>
+                        
+                        <input className='form-input'
                             type="text"
-
+                            placeholder='name'
                             required
                             value={name}
                             onChange={updateName}
                         />
                     </label>
-                    <label>
-                        address
-                        <input
-                            type="text"
+                    <label className='form-label'>
 
+                        <input className='form-input'
+                            type="text"
+                            placeholder='address'
                             required
                             value={address}
                             onChange={updateAddress}
                         />
                     </label>
-                    <label>
-                        city
-                        <input
+                    <label className='form-label'>
+
+                        <input className='form-input'
                             type="text"
+                            placeholder='city'
                             required
                             value={city}
                             onChange={updateCity}
                         />
                     </label>
-                    <label>
-                        state
-                        <input
-                            type="text"
+                    <label className='form-label'>
 
+                        <input className='form-input'
+                            type="text"
+                            placeholder='state'
                             required
                             value={state}
                             onChange={updateState}
                         />
                     </label>
-                    <label>
-                        Country
-                        <input
-                            type="text"
+                    <label className='form-label'>
 
+                        <input className='form-input'
+                            type="text"
+                            placeholder='country'
                             required
                             value={country}
                             onChange={updateCountry}
                         />
                     </label>
-                    <label>
-                        Description
-                        <input
-                            type="text"
+                    <label className='form-label'>
 
+                        <input className='form-input'
+                            type="text"
+                            placeholder='description'
                             required
                             value={description}
                             onChange={updateDescription}
                         />
                     </label>
-                    <label>
-                        price
-                        <input
+                    <label className='form-label'>
+
+                        <input className='form-input'
                             type="number"
+                            placeholder='price'
                             min='1'
                             max='1000'
                             required
@@ -164,7 +168,7 @@ const EditSpotForm = () => {
                         />
                     </label>
 
-                    <button className='button' type="submit">Save changes</button>
+                    <button className='button form-button' type="submit">Save changes</button>
                 </form>
             </section>
 
