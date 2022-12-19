@@ -64,8 +64,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project!
 
-[Screen Shot 2022-12-19 at 3 43 42 AM](https://user-images.githubusercontent.com/108085381/208407990-16e260a5-909c-4fcb-925a-69b1afaa665e.png)
-
+![Screen Shot 2022-12-19 at 3 43 42 AM](https://user-images.githubusercontent.com/108085381/208408568-8d391fc9-210e-47ca-af3d-cf3db735358f.png)
 
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
