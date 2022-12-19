@@ -5,13 +5,6 @@
     flex-direction: column;
 } */
 
-.big-box-div {
-    display:flex-box;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
 .all-spots-page {
     display:flex-box;
     flex-direction: row;
@@ -20,16 +13,102 @@
     width: 307px;
     margin: 10px 10px
 }
+.button:hover{
+    cursor:pointer;
+}
+/* single spots page */
+.below-name-details{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.share-and-like-div{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    padding-left: 1800px;
+    align-items: center;
+}
+
+.star-and-superhost-div{
+    padding-right:20px;
+}
 
 .spot-preview-image-div {
-    justify-content:center;
+    border-radius: 12px;
+    height: 800px;
+    display: flex;
 }
+
+.overal-single-spot {
+    padding: 0px 80px;
+}
+
+.profile-button {
+    display: flex;
+    padding: 8px;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    position: sticky;
+    padding-right: 30px;
+}
+
+.logo-and-profile-button-div {
+    list-style:none;
+}
+
+
+
+/*  */
+
+
+.big-box-div {
+    display:flex-box;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 
 .city-state-div {
     display:flex;
-    justify-content: right;
-    align-items:normal;
+    box-sizing:border-box;
+    flex-wrap:wrap;
+    position:relative;
+    padding-left: 40px;
+    padding-right: 40px;
 
+}
+
+
+.flex-center {
+    display:flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+.spot-preview-image-div {
+    justify-content:center;
+
+}
+
+
+.spot-modal-info {
+    display:flex;
+    flex-direction: column;
+    border-radius: 12px;
+    border: solid grey 2px;
+    box-sizing:border-box;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
 }
 
 .rating-div {
@@ -41,17 +120,9 @@
     padding-top:10px;
 }
 
-.big-box-div {
-    justify-content:center
-}
 
 /* .all-spots-details {
     display:flex;
     justify-content: space-between;
     margin:8px 5 px
 } */
-
-.spot-modal-info {
-    border-radius: 12px;
-    border: solid grey 2px;
-}

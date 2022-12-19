@@ -16,8 +16,10 @@ function DemoUser() {
   };
 
   return (
-    <div className='clickable-div' onClick={handleSubmit}>
-      DemoUserLogin
+    <div className='button'>
+      <div className='clickable-div' onClick={handleSubmit}>
+        DemoUserLogin
+      </div>
     </div>
   );
 }

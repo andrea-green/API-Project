@@ -9,13 +9,13 @@ function Navigation({ isLoaded }){
 
   return (
     <ul>
-      <li>
+      <li className='logo-and-profile-button-div'>
         <NavLink exact to="/">
           <img className='logo' src={require('../../snowBee-logo.png')} alt='snow-bee-logo'></img>
         </NavLink>
       </li>
       {isLoaded && (
-        <li>
+        <li className='profile-button'>
           <ProfileButton user={sessionUser} />
         </li>
       )}

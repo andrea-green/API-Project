@@ -164,7 +164,7 @@ const EditSpotForm = () => {
                         />
                     </label>
 
-                    <button type="submit">Save changes</button>
+                    <button className='button' type="submit">Save changes</button>
                 </form>
             </section>
 

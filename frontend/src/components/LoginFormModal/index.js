@@ -49,9 +49,12 @@ function LoginFormModal() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+
           />
         </label>
-        <button type="submit">Log In</button>
+        <button
+        className='button'
+        type="submit">Log In</button>
       </form>
     </>
   );

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import OpenModalButton from '../OpenModalButton';
 import CreateReviewForm from '../Review/create-review';
 import DeleteReviewForm from './delete-review';
+import '../../index.css';
 
 
 
@@ -27,15 +28,22 @@ function ReviewsComponent() {
             } else if (!ownerCheck) {
                 if (reviewCheck) {
                     return (
-                        <div className='button'>{<OpenModalButton
-                            modalComponent={<DeleteReviewForm myReview={reviewCheck} />}
-                            buttonText='Delete Review' />}</div>
+
+                            <OpenModalButton className='button'
+                                modalComponent={<DeleteReviewForm myReview={reviewCheck} />}
+                                buttonText='Delete Review'
+                            />
+
                     )
                 } else if (!reviewCheck) {
                     return (
-                        <div className='button'>{<OpenModalButton
-                            modalComponent={<CreateReviewForm myReview={reviewCheck} />}
-                            buttonText='Leave a review' />}</div>
+
+
+                            <OpenModalButton className='button'
+                                modalComponent={<CreateReviewForm myReview={reviewCheck} />}
+                                buttonText='Leave a review'
+                            />
+
                     )
                 }
             }
@@ -47,7 +55,7 @@ function ReviewsComponent() {
         <div>
             <AllReviews />
             <div className='review-ternary-check'>
-                <div>
+                <div className='button'>
                     {conditionals()}
                 </div>
 

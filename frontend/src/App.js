@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import AllSpots from "./components/AllSpots/allSpots";
 import SingleSpot from "./components/SingleSpot/single-spot-comp";
 import ReviewsComponent from "./components/Review/review-index";
+import Footer from "./css-modules/singleSpot/footer/footer";
 
 
 
@@ -26,8 +27,10 @@ function App() {
             <AllSpots />
           </Route>
           <Route path='/spots/:spotId'>
-            <SingleSpot />
-            <ReviewsComponent />
+            <div className='listing-page'>
+              <SingleSpot />
+              <ReviewsComponent />
+            </div>
           </Route>
           <Route path='/'>
             <div className='404Error'>
@@ -38,6 +41,9 @@ function App() {
 
         </Switch>
       )}
+
+      <Footer />
+
     </div>
   );
 }

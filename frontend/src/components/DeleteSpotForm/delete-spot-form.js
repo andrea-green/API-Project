@@ -66,6 +66,7 @@ const DeleteSpotForm = () => {
                             />
                         </label>
                         <button
+                        className='button'
                         type="submit"
                         disabled={!boolean}
                         >Confirm</button>

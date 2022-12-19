@@ -26,8 +26,8 @@ function AllSpots() {
                 <div className="all-spots-page">
                     {allSpotsArr.map(({ id, city, state, avgRating, price, previewImage }) => (
                         <div key={id} className='all-spots-details' onClick={() => history.push(`/spots/${id}`)}>
-                            <div className='spot-preview-image-div'>
-                                <img src={previewImage} alt='preview-img'></img>
+                            <div className='button'>
+                                <img className='spot-preview-image'src={previewImage} alt='preview-img'></img>
                             </div>
                             <div className='city-state-div'> {`${city},${state}`}</div>
                             <div className='price-div'>{`$${price} night`}</div>

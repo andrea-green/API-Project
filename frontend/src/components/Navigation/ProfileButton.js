@@ -46,8 +46,8 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
-    <>
-      <button onClick={openMenu}>
+    <div>
+      <button className='button' onClick={openMenu}>
         <i class="fa-solid fa-user"></i>
       </button>
       <ul className={ulClassName} ref={ulRef}>
@@ -58,7 +58,7 @@ function ProfileButton({ user }) {
               <li>{user.firstName} {user.lastName}</li>
               <li>{user.email}</li>
             </div>
-            <div>
+            <div className='button'>
 
               <OpenModalMenuItem
                 itemText="List Your Property"
@@ -66,13 +66,15 @@ function ProfileButton({ user }) {
                 modalComponent={<CreateSpotForm />}
               />
             </div>
-            <OpenModalMenuItem
-              itemText="My Reviews"
-              onItemClick={closeMenu}
-              modalComponent={<UserReviewsModal />}
-            />
+            <div className="button">
+              <OpenModalMenuItem
+                itemText="My Reviews"
+                onItemClick={closeMenu}
+                modalComponent={<UserReviewsModal />}
+              />
+            </div>
             <li>
-              <button onClick={logout}>Log Out</button>
+              <button className='button' onClick={logout}>Log Out</button>
             </li>
           </>
         ) : (
@@ -81,6 +83,7 @@ function ProfileButton({ user }) {
               itemText="Log In"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
+              className='modal'
             />
             <OpenModalMenuItem
               itemText="Sign Up"
@@ -91,7 +94,7 @@ function ProfileButton({ user }) {
           </>
         )}
       </ul>
-    </>
+    </div>
   );
 }
 

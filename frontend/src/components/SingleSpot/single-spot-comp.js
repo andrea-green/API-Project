@@ -7,15 +7,14 @@ import OpenModalButton from '../OpenModalButton';
 
 import EditSpotForm from '../EditSpotForm/EditSpotForm';
 import DeleteSpotForm from '../DeleteSpotForm/delete-spot-form';
-import Footer from '../../css-modules/singleSpot/footer/footer';
 
+import '../../index.css';
 
 function SingleSpot() {
     const user = useSelector((state) => state.session.user);
     const mySpot = useSelector((state) => state.Spots.singleSpot);
 
     const spotReviews = useSelector((state) => state.Reviews.spot);
-
 
 
     const dispatch = useDispatch();
@@ -26,15 +25,12 @@ function SingleSpot() {
     useEffect(() => {
         dispatch(getMySpotThunk(spotId))
             .catch(() => history.push('/PageNotFound'))
-    }, [dispatch, spotId, spotReviews,history]);
+    }, [dispatch, spotId, spotReviews, history]);
 
 
     if (!mySpot?.id) return null;
     return (
         <div>
-            <div>
-                <SingleSpotDetails />
-            </div>
             <div>
                 <ul className='errors-list'>
                     {validationErrors.map((error) => (
@@ -42,41 +38,44 @@ function SingleSpot() {
                     ))}
                 </ul>
             </div>
+            <div className='spot-modal-and-details'>
+                <div>
+                    <SingleSpotDetails />
+                </div>
+                <div className='spot-modal-info'>
+                    <div className='spot-modal-info-header'>
+                        <div className='price-per-night'>
+                            <h1>
+                                {`$${mySpot.price} night`}
 
-            <div className='spot-modal-info'>
-                <div className='spot-modal-info-header'>
-                    <div className='price-per-night'>
-                        <h1>
-                            {`$${mySpot.price} night`}
-
-                        </h1>
-                    </div>
-                    <i class="fa-solid fa-star">{mySpot.avgRating}</i>
-                    <div className='number-of-reviews'>
-                        <div>
-                            {`${mySpot.numReviews} Reviews`}
+                            </h1>
                         </div>
-                    </div>
-                    <div className='create-review'>
-                    </div>
-                    {user && user?.id === mySpot?.Owner?.id ? (
-                        <div>
-                            <div>{<OpenModalButton
-                                modalComponent={<EditSpotForm />}
-                                buttonText='Edit Spot' />}</div>
-                            <div>{<OpenModalButton
-                                modalComponent={<DeleteSpotForm />}
-                                buttonText='Delete Spot ' />}</div>
+                        <i class="fa-solid fa-star">{mySpot.avgRating}</i>
+                        <div className='number-of-reviews'>
+                            <div>
+                                {`${mySpot.numReviews} Reviews`}
+                            </div>
                         </div>
-                    ) : (
-                        <div className='fees-div'>
-                            <div>{`Cleaning fee = $${25}`}</div>
-                            <div>{`Service fee = $${100}`}</div>
+                        <div className='create-review'>
                         </div>
-                    )}
+                        {user && user?.id === mySpot?.Owner?.id ? (
+                            <div >
+                                <div className='button'>{<OpenModalButton
+                                    modalComponent={<EditSpotForm />}
+                                    buttonText='Edit Spot' />}</div>
+                                <div className='button'>{<OpenModalButton
+                                    modalComponent={<DeleteSpotForm />}
+                                    buttonText='Delete Spot ' />}</div>
+                            </div>
+                        ) : (
+                            <div className='fees-div'>
+                                <div>{`Cleaning fee = $${25}`}</div>
+                                <div>{`Service fee = $${100}`}</div>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
-            <div><Footer/></div>
         </div>
 
     );

@@ -16,7 +16,7 @@ const CreateReviewForm = () => {
     const history = useHistory();
 
     const mySpotId = useSelector((state) => state.Spots.singleSpot.id);
-   const currentUser = useSelector((state)=>state.session.user);
+    const currentUser = useSelector((state) => state.session.user);
 
 
     const updateReview = (e) => setReview(e.target.value);
@@ -32,11 +32,11 @@ const CreateReviewForm = () => {
         };
 
         const reviewAddDetails = {
-            User:currentUser,
-            ReviewImages:[],
+            User: currentUser,
+            ReviewImages: [],
         }
 
-        return dispatch(createNewReviewThunk(newReview, mySpotId,reviewAddDetails))
+        return dispatch(createNewReviewThunk(newReview, mySpotId, reviewAddDetails))
             //.then(()=> history.push(`/spots/${mySpotId}`))
             .then(closeModal)
             .catch(async (res) => {
@@ -81,7 +81,9 @@ const CreateReviewForm = () => {
                             </select>
 
                         </label>
-                        <button type='submit'>Leave a Review</button>
+
+                            <button className='button' type='submit'>Leave a Review</button>
+
                     </form>
                 </section>
             </div>
