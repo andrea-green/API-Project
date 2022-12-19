@@ -48,6 +48,7 @@ const DeleteReviewForm = ({ myReview }) => {
                         No
                         <input
                             type="radio"
+                            class='button'
                             required
                             checked={boolean ? false : true}
                             onChange={falseBoolean}
@@ -57,6 +58,7 @@ const DeleteReviewForm = ({ myReview }) => {
                         Yes
                         <input
                             type="radio"
+                            class='button'
                             required
                             checked={boolean}
                             onChange={trueBoolean}
