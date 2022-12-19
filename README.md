@@ -62,10 +62,13 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## About The Project!
+
+[Screen Shot 2022-12-19 at 3 43 42 AM](https://user-images.githubusercontent.com/108085381/208407990-16e260a5-909c-4fcb-925a-69b1afaa665e.png)
+
+
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
-
 snowBee is a vacation home rental site that makes planning your next trip easier!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
