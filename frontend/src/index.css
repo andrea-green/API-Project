@@ -322,3 +322,15 @@
 .price-div{
     margin-top:50px;
 }
+
+.dropdown-menu-div{
+
+    border-radius: 12px;
+    border: solid grey 2px;
+    box-sizing:border-box;
+    text-align: center;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+}
