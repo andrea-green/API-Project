@@ -5,14 +5,6 @@
     flex-direction: column;
 } */
 
-.all-spots-page {
-    display:flex-box;
-    flex-direction: row;
-    justify-content: center;
-    height: 323px;
-    width: 307px;
-    margin: 10px 10px
-}
 .button:hover{
     cursor:pointer;
 }
@@ -30,7 +22,6 @@
     display: flex;
     justify-content: flex-end;
     flex-direction: row;
-    padding-left: 1800px;
     align-items: center;
 }
 
@@ -39,9 +30,16 @@
 }
 
 .spot-preview-image-div {
+    display:flex;
     border-radius: 12px;
     height: 800px;
     display: flex;
+    align-items: center;
+}
+
+.preview-image-div {
+    width: 100%;
+    height: 100%;
 }
 
 .overal-single-spot {
@@ -51,18 +49,115 @@
 .profile-button {
     display: flex;
     padding: 8px;
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: flex-end;
     align-items: center;
     position: sticky;
     padding-right: 30px;
+    padding-right: 30px;
 }
 
 .logo-and-profile-button-div {
-    list-style:none;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 13px;
+}
+
+.spot-modal-info{
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    border: solid grey 2px;
+    box-sizing: border-box;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+    width: 30%;
+    margin-top: 36px;
+    position: sticky;
+    top: 100px;
+}
+
+.check-in-description {
+    padding:12px;
+}
+
+.property-information {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.spot-modal-and-details {
+    display: flex;
+    margin: 8px;
+}
+
+.logo {
+    display: block;
+    width: 102px;
+
+}
+
+.hosted-by-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.first-details {
+    display: flex;
+    flex-direction: column;
+}
+.check-in-description{
+    padding:8px;
+}
+.superhost-description{
+    padding:8px;
+}
+
+.check-in-process{
+    padding:8px;
+}
+
+.snow-cover-header{
+    font-weight:bolder;
+    color: red;
+}
+
+.review{
+    padding:8px;
+}
+
+.main-single-spot-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.all-reviews-outer-div {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(0,0,0,0.25);
+    margin-top: 30px;
 }
 
 
+.footer-main-div{
+    display: flex;
+    border-top: 1px solid rgb(221, 221, 221);
+    justify-content: space-evenly;
+    padding-top: 15px;
+
+}
 
 /*  */
 
