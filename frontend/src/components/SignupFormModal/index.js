@@ -52,6 +52,7 @@ function SignupFormModal() {
           <label className='form-label'>
 
             <input className='form-input'
+            placeholder="username"
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
