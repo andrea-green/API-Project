@@ -192,12 +192,16 @@
 .form-button{
     width: 100%;
     border-radius: 8px;
-    margin-top: 12px;
+    margin-top: 10%;
     padding: 8px;
     color: white;
     line-height: 16px;
     background: rgb(251, 70, 70);
-    margin-left: 9px;
+    margin-left: 2%;
+}
+
+.form-button:disabled{
+    background:gray
 }
 
 /*  */
@@ -256,6 +260,16 @@
     padding-top:10px;
 }
 
+.new-button{
+    border-radius: 8px;
+
+
+    color: white;
+    line-height: 25px;
+    background: rgb(251, 70, 70);
+
+
+}
 
 /* .all-spots-details {
     display:flex;

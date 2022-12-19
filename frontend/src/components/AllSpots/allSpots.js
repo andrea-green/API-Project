@@ -36,7 +36,6 @@ function AllSpots() {
                     ))}
                 </div>
             </div>
-            <div><Footer/></div>
         </div>
 
     );

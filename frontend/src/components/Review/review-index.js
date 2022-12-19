@@ -29,7 +29,7 @@ function ReviewsComponent() {
                 if (reviewCheck) {
                     return (
 
-                            <OpenModalButton className='button'
+                            <OpenModalButton className='button new-button'
                                 modalComponent={<DeleteReviewForm myReview={reviewCheck} />}
                                 buttonText='Delete Review'
                             />
@@ -39,7 +39,7 @@ function ReviewsComponent() {
                     return (
 
 
-                            <OpenModalButton className='button'
+                            <OpenModalButton className='button new-button'
                                 modalComponent={<CreateReviewForm myReview={reviewCheck} />}
                                 buttonText='Leave a review'
                             />
@@ -55,7 +55,7 @@ function ReviewsComponent() {
         <div>
             <AllReviews />
             <div className='review-ternary-check'>
-                <div className='button'>
+                <div>
                     {conditionals()}
                 </div>
 

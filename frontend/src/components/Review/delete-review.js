@@ -10,7 +10,7 @@ import { deleteReviewThunk } from '../../store/reviews';
 const DeleteReviewForm = ({ myReview }) => {
     const { closeModal } = useModal();
 
-    const mySingleSpot = useSelector((state)=>state.Spots.singleSpot)
+    const mySingleSpot = useSelector((state) => state.Spots.singleSpot)
     const dispatch = useDispatch();
     const history = useHistory();
     const [boolean, setBoolean] = useState(false);
@@ -33,16 +33,18 @@ const DeleteReviewForm = ({ myReview }) => {
 
     return (
         <div>
-            <h1>Are you sure you want to delete?</h1>
-            <section className='delete-review-form'>
+            <div className='form-header'>
+                <h1>Are you sure you want to delete?</h1>
+            </div>
+            <section className='form-body-container'>
                 <div className='delete-review-errors'>
                     <ul>{errorValidations.map((error) => (
                         <li key={error}>{error}</li>
                     ))}
                     </ul>
                 </div>
-                <form onSubmit={handleSubmit}>
-                    <label>
+                <form className='form-body' onSubmit={handleSubmit}>
+                    <label className='form-label'>
                         No
                         <input
                             type="radio"
@@ -61,6 +63,7 @@ const DeleteReviewForm = ({ myReview }) => {
                         />
                     </label>
                     <button
+                    className='button form-button'
                         type="submit"
                         disabled={!boolean}
                     >Confirm</button>
