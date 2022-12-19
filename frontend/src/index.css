@@ -220,7 +220,6 @@
     box-sizing:border-box;
     flex-wrap:wrap;
     position:relative;
-    padding-left: 40px;
     padding-right: 40px;
 
 }
@@ -262,17 +261,64 @@
 
 .new-button{
     border-radius: 8px;
-
-
     color: white;
     line-height: 25px;
     background: rgb(251, 70, 70);
+}
+
+.big-box-div {
+    display: flex;
+    justify-content: center;
+    padding: 0px 40px;
+    margin: 16px 0px 40px;
+
+}
+
+.front-page-image{
+    display: flex;
+    justify-content: center;
+}
+
+.spot-preview-image{
+    width: 278px;
+    height: 264px;
+    border-radius: 12px;
+
+}
+
+.all-spots-page{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+.all-spots-details {
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    margin:15px;
+
+}
+
+.spot-info{
+    display: flex;
+    justify-content:space-between;
+    margin:12px 6px;
+
+}
+
+.spot-rating{
+    display:flex;
+    justify-self: end;
+    align-items: center;
 
 
 }
 
-/* .all-spots-details {
+.flex-column{
     display:flex;
-    justify-content: space-between;
-    margin:8px 5 px
-} */
+    flex-direction: column;
+}
+
+.price-div{
+    margin-top:50px;
+}
