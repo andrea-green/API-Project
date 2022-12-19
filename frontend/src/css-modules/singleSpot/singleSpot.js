@@ -30,7 +30,7 @@ function SingleSpotDetails() {
             </div>
 
             <div className='spot-preview-image-div'>
-                <img src={spotPic.url} alt='spot-pic-url'></img>
+                <img src={spotPic?.url} alt='spot-pic-url'></img>
             </div>
 
             <div className='share-and-like'>
@@ -56,6 +56,14 @@ function SingleSpotDetails() {
             <div className='snow-cover-div'>
                 <h1>Snow Cover</h1>
                 <div>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</div>
+            </div>
+            <div className='spot-description-div'>
+                <h1>About</h1>
+                <div>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eleifend lacus eget sem imperdiet, et gravida ligula lacinia. Quisque iaculis mi magna,
+                ut volutpat neque accumsan in.Nam pulvinar porttitor ante, non suscipit felis auctor ac. Maecenas eget lacus ut nulla pharetra mollis quis a felis. Phasellus et tortor et.
+                </div>
+
             </div>
         </div>
     )

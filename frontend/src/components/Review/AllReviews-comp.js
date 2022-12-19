@@ -10,26 +10,26 @@ function AllReviews() {
     const dispatch = useDispatch();
 
     const { spotId } = useParams();
-    const spotReviews = useSelector((state)=>state.Reviews.spot);
-    const spotReviewsArr=Object.values(spotReviews);
-    
+    const spotReviews = useSelector((state) => state.Reviews.spot);
+    const spotReviewsArr = Object.values(spotReviews);
+
 
 
     useEffect(() => {
         dispatch(getSpotReviewsThunk(spotId))
-    },[dispatch,spotId]);
+    }, [dispatch, spotId]);
 
     return (
         <div>
             <div className='all-reviews-outer-div'>
                 <h1>Reviews</h1>
                 <div>
-                    {spotReviewsArr.map(({id,review,stars,User})=>(
+                    {spotReviewsArr.map(({ id, review, stars, User }) => (
                         <div key={id} className='individual-review-div'>
                             <div>
-                                <div>{User.firstName} {User.lastName}</div>
+                                <i class="fa-regular fa-face-smile">{User.firstName} {User.lastName}</i>
                                 <div className='user-review-div'>{review}</div>
-                                <div className='user-star-rating-div'>{stars}</div>
+                                <i class="fa-solid fa-star">{stars}</i>
                             </div>
                         </div>
 
