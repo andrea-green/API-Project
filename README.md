@@ -76,12 +76,11 @@ snowBee is a vacation home rental site that makes planning your next trip easier
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
-* [![Sequelize][Sequelize.js]][Sequelize-url]
+* equelize
 * [![React][React.js]][React-url]
-* [![Redux][Redux.js]][Redux-url]
-* [![CSS][CSS.io]][CSS-url]
+*Redux
+*CSS
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -93,7 +92,6 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
 1. Get a free API Key at [https://example.com](https://example.com)
 2. Clone the repo
@@ -181,7 +179,6 @@ Project Link :https://github.com/andrea-green/API-Project
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
 * [Choose an Open Source License](https://choosealicense.com)
 * [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
