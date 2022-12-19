@@ -96,7 +96,7 @@ const EditSpotForm = () => {
                 </div>
                 <form className='form-body' onSubmit={handleSubmit}>
                     <label className='form-label'>
-                        
+
                         <input className='form-input'
                             type="text"
                             placeholder='name'
@@ -168,7 +168,9 @@ const EditSpotForm = () => {
                         />
                     </label>
 
-                    <button className='button form-button' type="submit">Save changes</button>
+                    <button
+                    className='button form-button'
+                    type="submit">Save changes</button>
                 </form>
             </section>
 
