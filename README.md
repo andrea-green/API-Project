@@ -12,7 +12,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="![snowBee-logo png 00-03-33-999](https://user-images.githubusercontent.com/108085381/208408745-5e2ea22e-5b8d-479a-a6de-8ac4b1901cb7.png)
+" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">snowBee</h3>
@@ -67,7 +68,6 @@
 ![Screen Shot 2022-12-19 at 3 43 42 AM](https://user-images.githubusercontent.com/108085381/208408568-8d391fc9-210e-47ca-af3d-cf3db735358f.png)
 
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 snowBee is a vacation home rental site that makes planning your next trip easier!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
