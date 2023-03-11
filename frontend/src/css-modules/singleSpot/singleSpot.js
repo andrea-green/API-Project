@@ -25,10 +25,6 @@ function SingleSpotDetails() {
                         <i class="fa-solid fa-trophy">Superhost</i>
                     </div>
                     <span>{spot.city},{spot.state},{spot.country}</span>
-                    {/* <div className='share-and-like-div'>
-                        <i class="fa-solid fa-arrow-up-from-bracket">share</i>
-                        <i class="fa-solid fa-heart">Like</i>
-                    </div> */}
                 </div>
             </div>
         </div>
