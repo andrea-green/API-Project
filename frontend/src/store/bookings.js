@@ -3,7 +3,8 @@ import { csrfFetch } from './csrf';
 
 const GET_BOOKINGS = 'bookings/GET_BOOKINGS';
 const GET_USER_BOOKINGS = 'bookings/GET_USER_BOOKINGS';
-const CREATE_BOOKING = '/bookings/CREATE_BOOKING'
+const CREATE_BOOKING = '/bookings/CREATE_BOOKING';
+const DELETE_BOOKING = '/bookings/DELETE_REVIEW';
 
 
 
@@ -23,6 +24,11 @@ const createBookingAc = (booking) => ({
     type: CREATE_BOOKING,
     booking
 });
+
+const deleteBookingAc = (bookingId)=>({
+    type: DELETE_BOOKING,
+    bookingId
+})
 
 
 
@@ -59,6 +65,16 @@ export const createNewBookingThunk = (newBooking, spotId, bookingDetails) => asy
     return response;
 }
 
+export const deleteBookingThunk = (bookingId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/bookings/${bookingId}`,{
+        method: 'DELETE'
+    })
+    if (response.ok) {
+        dispatch(deleteBookingAc(bookingId))
+    }
+    return response;
+}
+
 
 const initialState = {
     spot: {},
@@ -88,8 +104,15 @@ export default function bookingsReducer(state = initialState, action) {
         case CREATE_BOOKING:{
             const newState = {spot:{...state.spot},user:{}};
             newState.spot[action.booking.id] = action.booking;
-            return newState; 
-        }
+            return newState;
+        };
+
+        case DELETE_BOOKING:{
+            const newState = {spot:{...state.spot}, user:{}};
+            delete newState.spot[action.bookingId];
+            return newState;
+        };
+        
         default:
             return state;;
     }
