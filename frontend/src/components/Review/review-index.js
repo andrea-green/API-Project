@@ -1,4 +1,4 @@
-
+import React from 'react';
 import AllReviews from './AllReviews-comp';
 import { useSelector } from 'react-redux';
 import OpenModalButton from '../OpenModalButton';
@@ -13,7 +13,8 @@ function ReviewsComponent() {
 
     //checking if user = owner.
     const user = useSelector((state) => state.session.user);
-    const owner = useSelector((state) => state.Spots.singleSpot?.ownerId);
+    const owner = ""
+    // const owner = useSelector((state) => state.Spots.singleSpot?.ownerId);
     const ownerCheck = owner === user?.id;
 
     //checking if user already has a review on the spot.
@@ -24,7 +25,7 @@ function ReviewsComponent() {
     const conditionals = () => {
         if (user) {
             if (ownerCheck) {
-                return <div></div>
+                return (<div></div>)
             } else if (!ownerCheck) {
                 if (reviewCheck) {
                     return (
@@ -37,8 +38,6 @@ function ReviewsComponent() {
                     )
                 } else if (!reviewCheck) {
                     return (
-
-
                             <OpenModalButton className='button new-button'
                                 modalComponent={<CreateReviewForm myReview={reviewCheck} />}
                                 buttonText='Leave a review'
@@ -48,7 +47,7 @@ function ReviewsComponent() {
                 }
             }
 
-        } else if (!user) return <div>You must be logged in to leave a review.</div>
+        } else if (!user) return (<div>You must be logged in to leave a review.</div>)
     };
 
     return (
