@@ -10,6 +10,7 @@ export default function Booking() {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
     const mySpotId = useSelector((state) => state.Spots.singleSpot.id);
+    const mySpot = useSelector((state) => state.Spots.singleSpot);
 
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
@@ -55,13 +56,6 @@ export default function Booking() {
                     <form className='form-body' onSubmit={handleSubmit}>
                         <label className='form-label'>
                             Start date:
-                            {/* <DatePicker
-                                selected={startDate}
-                                onChange={createStart}
-                                selectsStart
-                                startDate={startDate}
-                                endDate={endDate}
-                            /> */}
                             <DatePicker
                                 selected={startDate}
                                 onChange={createStart}
@@ -72,14 +66,6 @@ export default function Booking() {
                         </label>
                         <label className='form-label'>
                             End date:
-                            {/* <DatePicker
-                            // selected={endDate}
-                            // onChange={createEnd}
-                            // selectsEnd
-                            // startDate={startDate}
-                            // endDate={endDate}
-                            // minDate={startDate}
-                            /> */}
                             <DatePicker
                                 selected={endDate}
                                 onChange={createEnd}
@@ -88,7 +74,6 @@ export default function Booking() {
                                 endDate={endDate}
                                 minDate={startDate}
                             />
-
                         </label>
                         <button className='button form-button' type='submit'>Confirm your stay</button>
                     </form>
