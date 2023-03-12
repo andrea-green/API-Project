@@ -4,7 +4,7 @@ import { csrfFetch } from './csrf';
 const GET_BOOKINGS = 'bookings/GET_BOOKINGS';
 const GET_USER_BOOKINGS = 'bookings/GET_USER_BOOKINGS';
 const CREATE_BOOKING = '/bookings/CREATE_BOOKING';
-const DELETE_BOOKING = '/bookings/DELETE_REVIEW';
+const DELETE_BOOKING = '/bookings/DELETE_BOOKING';
 
 
 
@@ -97,7 +97,7 @@ export default function bookingsReducer(state = initialState, action) {
         case GET_USER_BOOKINGS: {
             const newState = { ...state, user: {} };
             action.userBookings.forEach(booking => {
-                newState.user[booking.id] = review
+                newState.user[booking.id] = booking
             });
             return newState;
         };
@@ -112,7 +112,7 @@ export default function bookingsReducer(state = initialState, action) {
             delete newState.spot[action.bookingId];
             return newState;
         };
-        
+
         default:
             return state;;
     }
