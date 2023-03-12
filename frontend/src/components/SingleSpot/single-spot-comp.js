@@ -106,17 +106,20 @@ function SingleSpot() {
                                     <div className='button'>{<OpenModalButton
                                         modalComponent={<DeleteSpotForm />}
                                         buttonText='Delete Spot ' />}</div>
+                                    <div className='button'>{<OpenModalButton
+                                        modalComponent={<Booking />}
+                                        buttonText='Reserve' />}</div>
                                 </div>
                             ) : (
-                                <div className='fees-div'>
-                                    <div>{`Cleaning fee = $${25}`}</div>
-                                    <div>{`Service fee = $${100}`}</div>
+                                <div>
+                                    <div className='fees-div'>
+                                        <div>{`Cleaning fee = $${25}`}</div>
+                                        <div>{`Service fee = $${100}`}</div>
+                                        <div style={{fontStyle:'italic',color:'grey'}}>Sign In or Login to book your stay. </div>
+                                    </div>
                                 </div>
                             )}
-                            {/* booking comp here*/}
-                            <div className='button'>{<OpenModalButton
-                                modalComponent={<Booking />}
-                                buttonText='Reserve' />}</div>
+
                         </div>
                     </div>
                 </div>
