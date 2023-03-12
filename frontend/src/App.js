@@ -30,7 +30,6 @@ function App() {
             <div className='listing-page'>
               <SingleSpot />
               <ReviewsComponent />
-              <Booking /> 
             </div>
           </Route>
           <Route path='/'>
