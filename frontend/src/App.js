@@ -7,7 +7,7 @@ import AllSpots from "./components/AllSpots/allSpots";
 import SingleSpot from "./components/SingleSpot/single-spot-comp";
 import ReviewsComponent from "./components/Review/review-index";
 import Footer from "./css-modules/singleSpot/footer/footer";
-
+import Booking from "./components/SingleSpot/booking";
 
 
 function App() {

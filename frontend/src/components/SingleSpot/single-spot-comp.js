@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMySpotThunk } from '../../store/spots';
 import { useParams, useHistory } from 'react-router-dom';
@@ -7,6 +7,7 @@ import OpenModalButton from '../OpenModalButton';
 
 import EditSpotForm from '../EditSpotForm/EditSpotForm';
 import DeleteSpotForm from '../DeleteSpotForm/delete-spot-form';
+import Booking from './booking';
 
 import '../../index.css';
 
@@ -112,6 +113,10 @@ function SingleSpot() {
                                     <div>{`Service fee = $${100}`}</div>
                                 </div>
                             )}
+                            {/* booking comp here*/}
+                            <div className='button'>{<OpenModalButton
+                                modalComponent={<Booking />}
+                                buttonText='Reserve' />}</div>
                         </div>
                     </div>
                 </div>

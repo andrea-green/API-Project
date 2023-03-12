@@ -4,7 +4,7 @@ import { csrfFetch } from './csrf';
 const GET_REVIEWS = '/reviews/GET_REVIEWS';
 const GET_USERREVIEWS = '/reviews/GET_USERREVIEWS';
 const CREATE_REVIEW = '/reviews/CREATE_REVIEW';
-const DELETE_REVIEW = 'reviews/DELETE_REVIEW';
+const DELETE_REVIEW = '/reviews/DELETE_REVIEW';
 
 
 //action creators
