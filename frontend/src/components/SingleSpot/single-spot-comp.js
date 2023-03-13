@@ -106,6 +106,9 @@ function SingleSpot() {
                                     <div className='button'>{<OpenModalButton
                                         modalComponent={<DeleteSpotForm />}
                                         buttonText='Delete Spot ' />}</div>
+                                    <div className='button'>{<OpenModalButton
+                                        modalComponent={<Booking />}
+                                        buttonText='Reserve' />}</div>
                                 </div>
                             ) : (
                                 <div>
@@ -116,9 +119,7 @@ function SingleSpot() {
                                     </div>
                                 </div>
                             )}
-                            <div className='button'>{<OpenModalButton
-                                modalComponent={<Booking />}
-                                buttonText='Reserve' />}</div>
+
 
                         </div>
                     </div>
