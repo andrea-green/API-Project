@@ -11,6 +11,7 @@ const DeleteBookingForm = ({ id }) => {
     const { closeModal } = useModal();
 
     const myBooking = useSelector((state) => state.Bookings.user)
+    const mySingleSpot = useSelector((state) => state.Spots.singleSpot)
     const dispatch = useDispatch();
     const history = useHistory();
     const [boolean, setBoolean] = useState(false);
@@ -29,7 +30,7 @@ const DeleteBookingForm = ({ id }) => {
                 const data = await res.json();
                 if (data && data.errors) setErrorValidations(data.errors);
             });
-        // history.push(`/spots/${mySingleSpot.id}`)
+        history.push(`/spots/${mySingleSpot.id}`)
     };
 
     return (
