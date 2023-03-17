@@ -25,7 +25,7 @@ const createBookingAc = (booking) => ({
     booking
 });
 
-const deleteBookingAc = (bookingId)=>({
+const deleteBookingAc = (bookingId) => ({
     type: DELETE_BOOKING,
     bookingId
 })
@@ -58,15 +58,16 @@ export const createNewBookingThunk = (newBooking, spotId, bookingDetails) => asy
     });
     if (response.ok) {
         const data = await response.json();
-        const booking = { ...data, ...bookingDetails };
-        dispatch(createBookingAc(booking))
+        console.log('data', data)
+        // const booking = { ...data, ...bookingDetails };
+        dispatch(createBookingAc(data))
         return data;
     }
     return response;
 }
 
 export const deleteBookingThunk = (bookingId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/bookings/${bookingId}`,{
+    const response = await csrfFetch(`/api/bookings/${bookingId}`, {
         method: 'DELETE'
     })
     if (response.ok) {
@@ -77,14 +78,8 @@ export const deleteBookingThunk = (bookingId) => async (dispatch) => {
 
 
 const initialState = {
-    spot:{
-        allBookings:{},
-        singleBooking:{}
-    },
-    user: {
-        allBookings:{},
-        singleBooking:{}
-    }
+    spot: {},
+    user: {}
 };
 
 
@@ -93,48 +88,36 @@ export default function bookingsReducer(state = initialState, action) {
     switch (action.type) {
 
         case GET_BOOKINGS: {
-            const newState = {...state,  spot:{
-                allBookings:{},
-                singleBooking:{}
-            } }
+            const newState = { ...state, spot: {} }
             action.bookings.forEach(booking => {
-                newState.spot.allBookings[booking.id] = booking
+                newState.spot[booking.id] = booking
             });
             return newState;
         };
 
         case GET_USER_BOOKINGS: {
-            const newState = { ...state, user: {
-                allBookings:{},
-                singleBooking:{}
-            } };
+            const newState = { ...state, user: {} };
             action.userBookings.forEach(booking => {
-                newState.user.allBookings[booking.id] = booking
+                newState.user[booking.id] = booking
             });
             return newState;
         };
-        case CREATE_BOOKING:{
-            const newState = {spot:{
-                allBookings:{...state.spot.allBookings},
-                singleBooking:{}
-            },user:{
-                allBookings:{},
-                singleBooking:{}
-            }};
-            newState.spot.allBookings[action.booking.id] = action.booking;
-            newState.spot.singleBooking = action.booking
+        case CREATE_BOOKING: {
+            const newState = {
+                spot: {...state.spot},
+                user: {...state.user}
+            };
+            newState.spot[action.booking.id] = action.booking;
+            newState.user[action.booking.id] = action.booking;
             return newState;
         };
-
-        case DELETE_BOOKING:{
-            const newState = {spot:{
-                allBookings:{...state.spot.allBookings},
-                singleBooking:{}
-            }, user:{
-                allBookings:{},
-                singleBooking:{}
-            }};
-            delete newState.spot.allBookings[action.bookingId];
+        case DELETE_BOOKING: {
+            const newState = {
+                spot: { ...state.spot },
+                user: { ...state.user }
+            };
+            delete newState.spot[action.bookingId];
+            delete newState.user[action.bookingId];
             return newState;
         };
 

@@ -10,7 +10,7 @@ import { deleteBookingThunk } from '../../store/bookings';
 const DeleteBookingForm = ({ id }) => {
     const { closeModal } = useModal();
 
-    const myBooking = useSelector((state) => state.Bookings.user.singleBooking)
+    const myBooking = useSelector((state) => state.Bookings.user)
     const dispatch = useDispatch();
     const history = useHistory();
     const [boolean, setBoolean] = useState(false);
@@ -35,7 +35,7 @@ const DeleteBookingForm = ({ id }) => {
     return (
         <div>
             <div className='form-header'>
-                <h1>Are you sure you want to delete this booking?</h1>
+                <h1>Are you sure you want to cancel this booking?</h1>
             </div>
             <section className='form-body-container'>
                 <div className='delete-review-errors'>

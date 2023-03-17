@@ -11,7 +11,7 @@ export default function UserBookings() {
 
     const [setErrors] = useState([]);
 
-    const bookings = useSelector(state => state.Bookings.user.allBookings);
+    const bookings = useSelector(state => state.Bookings.user);
 
     const bookingsArr = Object.values(bookings)
 
@@ -39,7 +39,7 @@ export default function UserBookings() {
                         <div key={booking.startDate}>{booking.startDate} - {booking.endDate}</div>
                         <div className='button'>{<OpenModalButton
                             modalComponent={<DeleteBookingForm id={booking.id}/>}
-                            buttonText='Delete booking' />}</div>
+                            buttonText='Cancel booking' />}</div>
                     </div>
                 )) : (
                     <div>You have no bookings.</div>
