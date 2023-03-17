@@ -77,8 +77,14 @@ export const deleteBookingThunk = (bookingId) => async (dispatch) => {
 
 
 const initialState = {
-    spot: {},
-    user: {}
+    spot:{
+        allBookings:{},
+        singleBooking:{}
+    },
+    user: {
+        allBookings:{},
+        singleBooking:{}
+    }
 };
 
 
@@ -87,29 +93,48 @@ export default function bookingsReducer(state = initialState, action) {
     switch (action.type) {
 
         case GET_BOOKINGS: {
-            const newState = { spot: {}, user: {} }
+            const newState = {...state,  spot:{
+                allBookings:{},
+                singleBooking:{}
+            } }
             action.bookings.forEach(booking => {
-                newState.spot[booking.id] = booking
+                newState.spot.allBookings[booking.id] = booking
             });
             return newState;
         };
 
         case GET_USER_BOOKINGS: {
-            const newState = { ...state, user: {} };
+            const newState = { ...state, user: {
+                allBookings:{},
+                singleBooking:{}
+            } };
             action.userBookings.forEach(booking => {
-                newState.user[booking.id] = booking
+                newState.user.allBookings[booking.id] = booking
             });
             return newState;
         };
         case CREATE_BOOKING:{
-            const newState = {spot:{...state.spot},user:{}};
-            newState.spot[action.booking.id] = action.booking;
+            const newState = {spot:{
+                allBookings:{...state.spot.allBookings},
+                singleBooking:{}
+            },user:{
+                allBookings:{},
+                singleBooking:{}
+            }};
+            newState.spot.allBookings[action.booking.id] = action.booking;
+            newState.spot.singleBooking = action.booking
             return newState;
         };
 
         case DELETE_BOOKING:{
-            const newState = {spot:{...state.spot}, user:{}};
-            delete newState.spot[action.bookingId];
+            const newState = {spot:{
+                allBookings:{...state.spot.allBookings},
+                singleBooking:{}
+            }, user:{
+                allBookings:{},
+                singleBooking:{}
+            }};
+            delete newState.spot.allBookings[action.bookingId];
             return newState;
         };
 

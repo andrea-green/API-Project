@@ -10,7 +10,7 @@ function UserReviewsModal() {
     const [setErrors] = useState([]);
 
     const reviewData = useSelector(state => state.Reviews.user);
-    
+
     const reviewArr = Object.values(reviewData)
 
     useEffect(() => {
@@ -35,6 +35,7 @@ function UserReviewsModal() {
                     <div className='my-reviews-card-div'>
                         <div key={review.id}>{review.review}</div>
                         <div key={review.stars}>{review.stars}</div>
+                        
                     </div>
                 )) : (
                     <div>You have no reviews.</div>

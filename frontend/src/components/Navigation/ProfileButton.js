@@ -7,6 +7,8 @@ import SignupFormModal from '../SignupFormModal';
 import DemoUser from "../DemoUser";
 import CreateSpotForm from "../CreateSpotFormModal/CreateSpotForm";
 import UserReviewsModal from "../Review/user-reviews";
+import UserBookings from "../Bookings/user-bookings";
+
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -48,7 +50,7 @@ function ProfileButton({ user }) {
   return (
     <div className='dropdown-menu-div'>
       <button className='button' onClick={openMenu}>
-        <i class="fa-solid fa-user"></i>
+        <i className="fa-solid fa-user"></i>
       </button>
 
       <ul className={ulClassName} ref={ulRef}>
@@ -73,6 +75,13 @@ function ProfileButton({ user }) {
                 itemText="My Reviews"
                 onItemClick={closeMenu}
                 modalComponent={<UserReviewsModal />}
+              />
+            </div>
+            <div className="button form-input">
+              <OpenModalMenuItem
+                itemText="My Bookings"
+                onItemClick={closeMenu}
+                modalComponent={<UserBookings />}
               />
             </div>
             <li>

@@ -27,13 +27,13 @@ function AllReviews() {
                     {spotReviewsArr.map(({ id, review, stars, User }) => (
                         <div key={id} className='individual-review-div'>
                             <div className='review'>
-                                <i class="fa-regular fa-face-smile" >
+                                <i className="fa-regular fa-face-smile" >
                                     <div style={{ fontFamily: 'sans-serif',fontWeight:'bolder' }}>
                                     {User.firstName} {User.lastName}
                                     </div>
                                 </i>
                                 <div className='user-review-div'>{review}</div>
-                                <i class="fa-solid fa-star">{stars}</i>
+                                <i className="fa-solid fa-star">{stars}</i>
                             </div>
                         </div>
 

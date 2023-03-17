@@ -64,7 +64,7 @@ function SingleSpot() {
                             <div>
                                 <i class="fa-solid fa-trophy">{owner} is a Superhost</i>
                                 <div className='superhost-description'>Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.</div>
-                                <i class="fa-solid fa-key">Great check-in experience</i>
+                                <i className="fa-solid fa-key">Great check-in experience</i>
                                 <div className='check-in-process'>92% of recent guests gave the check-in process a 5-star rating. </div>
                             </div>
                         </div>
@@ -90,7 +90,7 @@ function SingleSpot() {
 
                                 </h1>
                             </div>
-                            <i class="fa-solid fa-star">{mySpot.avgRating}</i>
+                            <i className="fa-solid fa-star">{mySpot.avgRating}</i>
                             <div className='number-of-reviews'>
                                 <div>
                                     {`${mySpot.numReviews} Reviews`}

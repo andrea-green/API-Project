@@ -20,9 +20,9 @@ function SingleSpotDetails() {
             <div className='city-state-review-div'>
                 <div className='below-name-details'>
                     <div className='star-and-superhost-div'>
-                        <i class="fa-regular fa-star">{spot.avgStarRating}</i>
+                        <i className="fa-regular fa-star">{spot.avgStarRating}</i>
                         <span>{spot.numReview}</span>
-                        <i class="fa-solid fa-trophy">Superhost</i>
+                        <i className="fa-solid fa-trophy">Superhost</i>
                     </div>
                     <span>{spot.city},{spot.state},{spot.country}</span>
                 </div>
