@@ -18,7 +18,7 @@ function List(props) {
     })
 
     return (
-        <ul>
+        <ul style={{listStyle:'none'}}>
             {!!props.input.length &&
             (
                 filteredData.map((item) => (

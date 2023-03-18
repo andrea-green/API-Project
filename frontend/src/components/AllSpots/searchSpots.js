@@ -16,8 +16,6 @@ function SearchSpots() {
     const filteredSpots = allSpotsArr.filter((spot) => spot.city === city)
 
 
-
-
     return (
 
         <div className='big-box-div'>
