@@ -7,6 +7,8 @@ import AllSpots from "./components/AllSpots/allSpots";
 import SingleSpot from "./components/SingleSpot/single-spot-comp";
 import ReviewsComponent from "./components/Review/review-index";
 import Footer from "./css-modules/singleSpot/footer/footer";
+import SearchSpots from "./components/AllSpots/searchSpots";
+import { getSpotsThunk } from "./store/spots";
 
 
 
@@ -15,8 +17,12 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    dispatch(getSpotsThunk())
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
+
+
+
 
   return (
     <div>
@@ -26,10 +32,13 @@ function App() {
           <Route exact path='/'>
             <AllSpots />
           </Route>
+          <Route exact path='/search/:city'>
+            <SearchSpots />
+          </Route>
           <Route path='/spots/:spotId'>
             <div className='listing-page'>
               <SingleSpot />
-              <ReviewsComponent />
+              {/* <ReviewsComponent /> */}
             </div>
           </Route>
           <Route path='/'>

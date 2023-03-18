@@ -4,6 +4,7 @@ import { getMySpotThunk } from '../../store/spots';
 import { useParams, useHistory } from 'react-router-dom';
 import SingleSpotDetails from '../../css-modules/singleSpot/singleSpot';
 import OpenModalButton from '../OpenModalButton';
+import ReviewsComponent from '../Review/review-index';
 
 import EditSpotForm from '../EditSpotForm/EditSpotForm';
 import DeleteSpotForm from '../DeleteSpotForm/delete-spot-form';
@@ -14,9 +15,9 @@ import '../../index.css';
 function SingleSpot() {
     const user = useSelector((state) => state.session.user);
     const mySpot = useSelector((state) => state.Spots.singleSpot);
-    const owner = useSelector((state) => state.Spots.singleSpot.Owner?.firstName)
+    const owner = useSelector((state) => state.Spots.singleSpot.Owner)
     const spotPics = mySpot.SpotImages
-    const mySpotPic = spotPics?.find(imgObj => imgObj.preview === true)
+    // const mySpotPic = spotPics.find(imgObj => imgObj.preview === true)
 
 
 
@@ -34,7 +35,9 @@ function SingleSpot() {
     }, [dispatch, spotId, spotReviews, history]);
 
 
-    if (!mySpot?.id) return null;
+    if (!mySpot.id) return null;
+    const mySpotPic = spotPics.find(imgObj => imgObj.preview === true)
+
     return (
         <div>
             <div>
@@ -49,12 +52,12 @@ function SingleSpot() {
                     <SingleSpotDetails />
                 </div>
                 <div className='spot-preview-image-div'>
-                    <img className='preview-image-div' src={mySpotPic?.url} alt='spot-pic-url'></img>
+                    <img className='preview-image-div' src={mySpotPic.url} alt='spot-pic-url'></img>
                 </div>
                 <div className='spot-modal-and-details'>
                     <div className='property-information'>
 
-                        <h1 className='hosted-by-header'>Entire rental unit hosted by {owner} </h1>
+                        <h1 className='hosted-by-header'>Entire rental unit hosted by {owner.firstName} </h1>
 
                         <div className='first-details-section'>
                             <div>
@@ -62,7 +65,7 @@ function SingleSpot() {
                                 <div className='check-in-description'> Check yourself in with the smartlock</div>
                             </div>
                             <div>
-                                <i class="fa-solid fa-trophy">{owner} is a Superhost</i>
+                                <i class="fa-solid fa-trophy">{owner.firstName} is a Superhost</i>
                                 <div className='superhost-description'>Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.</div>
                                 <i className="fa-solid fa-key">Great check-in experience</i>
                                 <div className='check-in-process'>92% of recent guests gave the check-in process a 5-star rating. </div>
@@ -99,7 +102,7 @@ function SingleSpot() {
                             <div className='create-review'>
                             </div>
                             {user
-                                ? user?.id === mySpot?.Owner?.id
+                                ? user.id === mySpot.Owner.id
                                     ? (<div >
                                         <div className='button'>{<OpenModalButton
                                             modalComponent={<EditSpotForm />}
@@ -129,6 +132,7 @@ function SingleSpot() {
                     </div>
                 </div>
             </div>
+            <ReviewsComponent/>
         </div>
 
     );
