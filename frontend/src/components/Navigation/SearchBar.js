@@ -12,7 +12,7 @@ function SearchBar() {
     }
     return (
         <div>
-            <div className="search">
+            <div className="search" style={{width:'30rem'}}>
                 <TextField
                     id="outlined-basic"
                     onChange={inputHandler}

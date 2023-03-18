@@ -160,7 +160,8 @@
     display: flex;
     border-top: 1px solid rgb(221, 221, 221);
     justify-content: space-evenly;
-    padding-top: 15px;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
 
 }
 .form-header{

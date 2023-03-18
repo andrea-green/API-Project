@@ -18,7 +18,7 @@ function List(props) {
     })
 
     return (
-        <ul style={{listStyle:'none'}}>
+        <ul style={{listStyle:'none',paddingLeft:'0', border:'1px solid lightgray', marginTop:'3%', width:'fit-content'}}>
             {!!props.input.length &&
             (
                 filteredData.map((item) => (
