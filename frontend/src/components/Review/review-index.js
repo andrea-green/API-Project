@@ -38,10 +38,12 @@ function ReviewsComponent() {
                     )
                 } else if (!reviewCheck) {
                     return (
-                        <OpenModalButton className='button new-button'
-                            modalComponent={<CreateReviewForm myReview={reviewCheck} />}
-                            buttonText='Leave a review'
-                        />
+                        <div style={{marginLeft:'3rem',marginBottom:'1rem'}}>
+                            <OpenModalButton className='review-button'
+                                modalComponent={<CreateReviewForm myReview={reviewCheck} />}
+                                buttonText='Leave a review'
+                            />
+                        </div>
 
                     )
                 }

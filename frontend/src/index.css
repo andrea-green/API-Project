@@ -273,7 +273,16 @@
     color: white;
     line-height: 25px;
     background: rgb(251, 70, 70);
+
+}
+
+.review-button {
     margin-left:3rem;
+    margin-bottom: 1rem;
+    border-radius:8px;
+    color:white;
+    line-height:25px;
+    background:rgb(251, 70, 70)
 }
 
 .big-box-div {
