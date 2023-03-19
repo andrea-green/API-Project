@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserBookingsThunk } from '../../store/bookings';
 import OpenModalButton from '../OpenModalButton';
 import DeleteBookingForm from './delete-booking';
+import { useModal } from '../../context/Modal';
 
 export default function UserBookings() {
 
 
     const dispatch = useDispatch();
+    const {closeModal} = useModal();
 
     const [setErrors] = useState([]);
 
@@ -29,8 +31,13 @@ export default function UserBookings() {
 
     return (
         <div className='My-Reviews'>
-            <div className='my-reviews-header-div'>
+            <div className='my-reviews-header-div' style={{display:'flex',alignItems:'flex-start'}}>
                 <h1>My Bookings</h1>
+                <button
+                    type='submit'
+                    onClick={closeModal}
+                    style={{cursor:'pointer'}}
+                >X</button>
             </div>
             <div className='my-reviews-modal-div'>
                 {!!bookingsArr.length ? bookingsArr.map(booking => (

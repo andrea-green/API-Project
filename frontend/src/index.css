@@ -11,6 +11,10 @@
 .button:hover{
     cursor:pointer;
 }
+
+.button{
+    cursor:pointer;
+}
 /* single spots page */
 .below-name-details{
     display: flex;

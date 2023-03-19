@@ -17,7 +17,7 @@ function OpenModalMenuItem({
 
   return (
     <div className='button'>
-      <li onClick={onClick}>{itemText}</li>
+      <li onClick={onClick} style={{listStyleType:'none'}}>{itemText}</li>
     </div>
   );
 }

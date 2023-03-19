@@ -56,7 +56,7 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <div className='user-info-div'>
+            <div className='user-info-div' style={{listStyleType:'none'}}>
               <li className='form-input'>{user.username}</li>
               <li className='form-input'>{user.firstName} {user.lastName}</li>
               <li className='form-input'>{user.email}</li>
@@ -84,7 +84,7 @@ function ProfileButton({ user }) {
                 modalComponent={<UserBookings />}
               />
             </div>
-            <li>
+            <li style={{listStyleType:'none'}}>
               <button className='button form-button' onClick={logout}>Log Out</button>
             </li>
           </>
