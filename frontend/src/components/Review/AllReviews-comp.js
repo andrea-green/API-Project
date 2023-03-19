@@ -32,8 +32,8 @@ function AllReviews() {
                                     {User.firstName} {User.lastName}
                                     </div>
                                 </i>
-                                <div className='user-review-div'>{review}</div>
-                                <i className="fa-solid fa-star">{stars}</i>
+                                <div className='user-review-div' style={{marginTop: '0.5rem'}}>{review}</div>
+                                <i className="fa-solid fa-star" style={{marginBottom:'0.25rem'}}>{stars}</i>
                             </div>
                         </div>
 
