@@ -33,8 +33,13 @@ const DeleteReviewForm = ({ myReview }) => {
 
     return (
         <div>
-            <div className='form-header'>
+            <div className='form-header' style={{display:'flex',alignItems:'flex-start'}}>
                 <h1>Are you sure you want to delete?</h1>
+                <button
+                    type='submit'
+                    onClick={closeModal}
+                    style={{cursor:'pointer'}}
+                > X </button>
             </div>
             <section className='form-body-container'>
                 <div className='delete-review-errors'>

@@ -85,8 +85,13 @@ const EditSpotForm = () => {
 
     return (
         <>
-            <div className='form-header'>
+            <div className='form-header' style={{display:'flex',alignItems:'flex-start'}}>
                 <h1>Edit your listing</h1>
+                <button
+                    type='submit'
+                    onClick={closeModal}
+                    style={{cursor:'pointer'}}
+                > X </button>
             </div>
             <section className='form-body-container'>
                 <div className='owner-edit-form'>

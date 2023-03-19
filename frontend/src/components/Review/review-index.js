@@ -29,16 +29,17 @@ function ReviewsComponent() {
             } else if (!ownerCheck) {
                 if (reviewCheck) {
                     return (
-
-                        <OpenModalButton className='button new-button'
-                            modalComponent={<DeleteReviewForm myReview={reviewCheck} />}
-                            buttonText='Delete Review'
-                        />
+                        <div style={{marginLeft:'3rem',marginBottom:'1rem',borderRadius: '8px', color:'white', lineHeight:'25px', background:'rgb(251, 70, 70)'}}>
+                            <OpenModalButton className='delete-button'
+                                modalComponent={<DeleteReviewForm myReview={reviewCheck} />}
+                                buttonText='Delete Review'
+                            />
+                        </div>
 
                     )
                 } else if (!reviewCheck) {
                     return (
-                        <div style={{marginLeft:'3rem',marginBottom:'1rem'}}>
+                        <div style={{ marginLeft: '3rem', marginBottom: '1rem' }}>
                             <OpenModalButton className='review-button'
                                 modalComponent={<CreateReviewForm myReview={reviewCheck} />}
                                 buttonText='Leave a review'
