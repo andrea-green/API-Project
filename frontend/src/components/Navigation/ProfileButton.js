@@ -56,6 +56,7 @@ function ProfileButton({ user }) {
     padding: '10px',
     background: 'white',
     border: '1px solid black',
+    borderRadius: '10px',
     zIndex: '1'
   };
 
