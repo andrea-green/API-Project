@@ -18,13 +18,13 @@ function SingleSpotDetails() {
             </div>
 
             <div className='city-state-review-div'>
-                <div className='below-name-details'>
+                <div className='below-name-details' style={{marginBottom:'1rem'}}>
                     <div className='star-and-superhost-div'>
-                        <i className="fa-regular fa-star">{spot.avgStarRating}</i>
-                        <span>{spot.numReview}</span>
-                        <i className="fa-solid fa-trophy">Superhost</i>
+                        <i className="fa-regular fa-star"/>
+                        <span>{spot.avgStarRating} Reviews</span>
+                        <span style={{marginLeft:'1rem'}} >{spot.numReview}</span>
+                        <span style={{marginLeft:'1rem'}}>{spot.city},{spot.state},{spot.country}</span>
                     </div>
-                    <span>{spot.city},{spot.state},{spot.country}</span>
                 </div>
             </div>
         </div>
