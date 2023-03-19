@@ -263,6 +263,10 @@
     box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
 }
 
+.header{
+    position:fixed
+}
+
 .rating-div {
     display: flex;
     flex-direction: row;

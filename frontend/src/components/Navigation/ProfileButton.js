@@ -47,15 +47,28 @@ function ProfileButton({ user }) {
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
+  const ulStyle = {
+    position: 'absolute',
+    top: '100%',
+    left: '-3rem',
+    width: 'fit-content',
+    height: 'fit-content', // Set a fixed height for the ul element
+    padding: '10px',
+    background: 'white',
+    border: '1px solid black',
+    zIndex: '1'
+  };
+
+
   return (
     <div className='dropdown-menu-div'>
       <button className='button' onClick={openMenu}>
         <i className="fa-solid fa-user"></i>
       </button>
 
-      <ul className={ulClassName} ref={ulRef}>
+      <ul className={ulClassName} ref={ulRef} style={ulStyle}>
         {user ? (
-          <>
+          <div >
             <div className='user-info-div' style={{listStyleType:'none'}}>
               <li className='form-input'>{user.username}</li>
               <li className='form-input'>{user.firstName} {user.lastName}</li>
@@ -87,7 +100,7 @@ function ProfileButton({ user }) {
             <li style={{listStyleType:'none'}}>
               <button className='button form-button' onClick={logout}>Log Out</button>
             </li>
-          </>
+          </div>
         ) : (
           <>
             <OpenModalMenuItem
