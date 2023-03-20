@@ -10,7 +10,6 @@ export default function Booking() {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
     const mySpotId = useSelector((state) => state.Spots.singleSpot.id);
-    const mySpot = useSelector((state) => state.Spots.singleSpot);
 
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
@@ -31,7 +30,10 @@ export default function Booking() {
 
 
         return dispatch(createNewBookingThunk(payload, mySpotId))
-            .then(closeModal)
+            .then(() => {
+                closeModal();
+                window.alert('Booking successfully made!')
+            })
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(Object.values(data.errors));

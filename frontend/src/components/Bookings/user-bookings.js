@@ -17,6 +17,8 @@ export default function UserBookings() {
 
     const bookingsArr = Object.values(bookings)
 
+
+
     useEffect(() => {
         dispatch(getUserBookingsThunk())
             .catch(
@@ -42,7 +44,7 @@ export default function UserBookings() {
             <div className='my-reviews-modal-div'>
                 {!!bookingsArr.length ? bookingsArr.map(booking => (
                     <div className='my-reviews-card-div'>
-                        <div key={booking.id}>{booking.spotId}</div>
+                        <div key={booking.id} style={{fontWeight:'bolder'}}>{booking.Spot.name}</div>
                         <div key={booking.startDate}>{booking.startDate} - {booking.endDate}</div>
                         <div className='button'>{<OpenModalButton
                             modalComponent={<DeleteBookingForm id={booking.id}/>}

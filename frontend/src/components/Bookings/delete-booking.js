@@ -25,7 +25,10 @@ const DeleteBookingForm = ({ id }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await dispatch(deleteBookingThunk(id))
-            .then(closeModal)
+            .then(() => {
+                closeModal();
+                window.alert('Your reservation was cancelled.')
+            })
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrorValidations(data.errors);
@@ -35,8 +38,13 @@ const DeleteBookingForm = ({ id }) => {
 
     return (
         <div>
-            <div className='form-header'>
+            <div className='form-header' style={{ display: 'flex', alignItems: 'flex-start' }}>
                 <h1>Are you sure you want to cancel this booking?</h1>
+                <button
+                    type='submit'
+                    onClick={closeModal}
+                    style={{ cursor: 'pointer' }}
+                > X </button>
             </div>
             <section className='form-body-container'>
                 <div className='delete-review-errors'>
@@ -67,7 +75,7 @@ const DeleteBookingForm = ({ id }) => {
                         />
                     </label>
                     <button
-                    className='button form-button'
+                        className='button form-button'
                         type="submit"
                         disabled={!boolean}
                     >Confirm</button>
