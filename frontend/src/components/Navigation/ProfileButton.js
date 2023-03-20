@@ -71,9 +71,9 @@ function ProfileButton({ user }) {
         {user ? (
           <div >
             <div className='user-info-div' style={{listStyleType:'none'}}>
-              <li className='form-input'>{user.username}</li>
+              {/* <li className='form-input'>{user.username}</li> */}
               <li className='form-input'>{user.firstName} {user.lastName}</li>
-              <li className='form-input'>{user.email}</li>
+              {/* <li className='form-input'>{user.email}</li> */}
             </div>
             <div className='button form-input'>
 

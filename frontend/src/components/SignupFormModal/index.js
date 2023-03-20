@@ -31,8 +31,13 @@ function SignupFormModal() {
 
   return (
     <>
-      <div className='form-header'>
+      <div className='form-header' style={{display:'flex',alignItems:'flex-start'}}>
         <h1>Sign Up</h1>
+        <button
+                    type='submit'
+                    onClick={closeModal}
+                    style={{cursor:'pointer'}}
+                > X </button>
       </div>
       <section className='form-body-container'>
         <form className='form-body' onSubmit={handleSubmit}>

@@ -50,7 +50,7 @@ function ReviewsComponent() {
                 }
             }
 
-        } else if (!user) return (<div>You must be logged in to leave a review.</div>)
+        } else if (!user) return (<div style={{marginLeft:'3rem',marginBottom:'1rem',color:'gray',fontStyle:'italic'}}>You must be logged in to leave a review.</div>)
     };
 
     return (
