@@ -29,7 +29,7 @@ function ReviewsComponent() {
             } else if (!ownerCheck) {
                 if (reviewCheck) {
                     return (
-                        <div style={{marginLeft:'3rem',marginBottom:'1rem',borderRadius: '8px', color:'white', lineHeight:'25px', background:'rgb(251, 70, 70)'}}>
+                        <div style={{marginLeft:'3rem',marginBottom:'1rem',borderRadius: '8px', color:'white', lineHeight:'25px'}}>
                             <OpenModalButton className='delete-button'
                                 modalComponent={<DeleteReviewForm myReview={reviewCheck} />}
                                 buttonText='Delete Review'

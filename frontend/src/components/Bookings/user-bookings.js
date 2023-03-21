@@ -29,8 +29,6 @@ export default function UserBookings() {
             );
     }, [dispatch, setErrors]);
 
-
-
     return (
         <div className='My-Reviews'>
             <div className='my-reviews-header-div' style={{display:'flex',alignItems:'flex-start'}}>
