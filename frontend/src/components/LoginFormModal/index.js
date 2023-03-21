@@ -27,7 +27,7 @@ function LoginFormModal() {
 
   return (
     <>
-      <div className='form-header' style={{display:'flex',alignItems:'flex-start',marginLeft:'8rem'}}>
+      <div className='form-header' style={{display:'flex',alignItems:'flex-start',marginLeft:'0'}}>
         <h1>Log In</h1>
         <button
                     type='submit'
